@@ -1,4 +1,4 @@
-<jsp:include page="/WEB-INF/jsp/common/header.jsp" />
+<%@include file="/WEB-INF/jsp/common/header.jsp"%>
 <div class="inner">
     <div id="content">
         <div class="box featured-box">
@@ -6,14 +6,14 @@
                 <ul id="myRoundabout">
                     <li>
                         <div class="prod_holder">
-                            <a href="register_new_return.jsp">
+                            <a href="<%=cp%>jsp/html/register_new_return.jsp">
                                 <img src="image/register.png" alt="Spicylicious store" />
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="prod_holder">
-                            <a href="product.html">
+                            <a href="#">
                                 <img src="image/snow-clad-himalayas-wallpapers.jpg" alt="Spicylicious store" />
                             </a>
                             <h3>The Himalayas</h3>
@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         <div class="prod_holder">
-                            <a href="product.html">
+                            <a href="#">
                                 <img src="image/lake_manas_sarovar.jpg" alt="Spicylicious store" />
                             </a>
                             <h3>Manasa Sarovar</h3>
@@ -29,7 +29,7 @@
                     </li>
                     <li>
                         <div class="prod_holder">
-                            <a href="product.html">
+                            <a href="#">
                                 <img src="image/kailash_lingam.jpg" alt="Spicylicious store" />
                             </a>
                             <h3>Kailasha Lingam</h3>
@@ -45,14 +45,16 @@
                 <span>Welcome to Ati Rudra Parayanam - 2012</span>
             </h2>
             <div class="box-content">
-                <p>By the Divine Lord's Loving Grace we are being blessed with an oppurtunity to conduct the Ati
-                    Rudra Parayanam for the year 2012 on the Himalayas facing Mount Kailash. Please register for further
-                    updates.</p>
+                <p>
+                    By the Divine Lord's Loving Grace we are being blessed with an oppurtunity to conduct the Ati Rudra
+                    Parayanam for the year 2012 on the Himalayas facing Mount Kailash. Please
+                    <a href="<%=cp%>jsp/html/register_new_return.jsp">register</a>
+                    for further updates.
+                </p>
             </div>
         </div>
     </div>
 </div>
-<jsp:include page="/WEB-INF/jsp/common/footer.jsp" />
 <script type="text/javascript">
 	$(document).ready(function() {
 		var interval = 0;
@@ -72,5 +74,4 @@
 		}, 3000);
 	}
 </script>
-</body>
-</html>
+<%@include file="/WEB-INF/jsp/common/footer.jsp"%>

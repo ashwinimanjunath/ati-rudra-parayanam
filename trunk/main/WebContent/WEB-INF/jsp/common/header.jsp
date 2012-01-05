@@ -1,22 +1,26 @@
+
+<% final String cp = request.getServletContext().getContextPath() +"/"; %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ati Rudra Parayanam - 2012</title>
-<link rel="stylesheet" href="stylesheet/stylesheet.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<%=cp%>stylesheet/stylesheet.css" type="text/css" media="screen" />
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css" href="stylesheet/jquery-ui-1.8.9.custom.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>stylesheet/jquery-ui-1.8.9.custom.css" />
 <!-- jQuery and Custom scripts -->
-<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
-<script src="js/jquery.cycle.lite.1.0.min.js" type="text/javascript"></script>
-<script src="js/custom_scripts.js" type="text/javascript"></script>
-<script src="js/jquery.roundabout.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.9.custom.min.js"></script>
-<script type="text/javascript" src="js/tabs.js"></script>
-<script type="text/javascript" src="js/jquery.form.js"></script>
-<!-- Tipsy -->
-<script src="js/tipsy/jquery.tipsy.js" type="text/javascript"></script>
-<link href="js/tipsy/css.tipsy.css" rel="stylesheet" type="text/css" />
+<script src="<%=cp%>js/jquery-1.5.2.min.js" type="text/javascript"></script>
+<script src="<%=cp%>js/jquery.cycle.lite.1.0.min.js" type="text/javascript"></script>
+<script src="<%=cp%>js/custom_scripts.js" type="text/javascript"></script>
+<script src="<%=cp%>js/jquery.roundabout.min.js" type="text/javascript"></script>
+<script src="<%=cp%>js/jquery-ui-1.8.9.custom.min.js" type="text/javascript"></script>
+<script src="<%=cp%>js/tabs.js" type="text/javascript"></script>
+<script src="<%=cp%>js/jquery.form.js" type="text/javascript"></script>
+<script src="<%=cp%>js/tipsy/jquery.tipsy.js" type="text/javascript"></script>
+<link href="<%=cp%>js/tipsy/css.tipsy.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+	window.cp = "<%=cp%>";
+</script>
 </head>
 <body>
     <!-- MAIN WRAPPER -->
@@ -26,7 +30,7 @@
             <div class="inner">
                 <div id="logo">
                     <a href="index.html">
-                        <img src="image/logo.png" width="217" height="141" alt="Spicylicious store" />
+                        <img src="<%= cp %>image/logo.png" width="217" height="141" alt="Spicylicious store" />
                     </a>
                 </div>
                 <div id="welcome">
@@ -39,14 +43,14 @@
                 <div class="menu">
                     <ul id="topnav">
                         <li>
-                            <a href="index.html">Home</a>
+                             <a href="<%= cp %>">Home</a>
                         </li>
                         <li>
                             <a href="category.html" title="Ati Rudra Parayanam at Kailash for 2012">2012 - Kailash
                                 Yatra</a>
                             <ul class="children">
                                 <li>
-                                    <a href="register_new_return.jsp">
+                                    <a href="<%=cp%>jsp/html/register_new_return.jsp">
                                         Register
                                         <span style="font-size: smaller; font-style: italic;">(Closes Jan/30/12)</span>
                                     </a>
