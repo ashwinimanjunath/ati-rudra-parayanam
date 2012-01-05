@@ -1,4 +1,4 @@
-<jsp:include page="/WEB-INF/jsp/common/header.jsp" />
+<%@include file="/WEB-INF/jsp/common/header.jsp" %>
 <div class="inner">
     <h2 class="heading-title">
         <span>Register for Kailash Yatra 2012</span>
@@ -13,7 +13,7 @@
                         <p>Registration is mandatory for every devotee. However please note that registration is not
                             a reservation. You application will be carefully reviewed for accuracy and suitability. We
                             thank you for your understanding and patience</p>
-                        <a class="button" id="button-contact" href="">
+                        <a class="button" id="button-contact" href="<%= cp %>jsp/html/new_registration.jsp">
                             <span>Register</span>
                         </a>
                     </div>
@@ -40,5 +40,5 @@
     </div>
     <div class="clear"></div>
 </div>
-<jsp:include page="/WEB-INF/jsp/common/footer.jsp" />
-<script type="text/javascript" src="js/app/register_new_return.js"></script>
+<script type="text/javascript" src="<%= cp %>js/app/register_new_return.js"></script>
+<%@include file="/WEB-INF/jsp/common/footer.jsp" %>

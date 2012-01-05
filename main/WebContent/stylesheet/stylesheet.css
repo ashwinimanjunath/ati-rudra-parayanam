@@ -2812,3 +2812,24 @@ h1.oops {
 .error_message {
 	color: red;
 }
+
+.formField .text, .formField .textarea, .formField .select {
+	width: 20em;
+}
+
+.helpText {
+	font-size: smaller;
+	font-style: italic;
+	color: #BBB	
+}
+
+.formField .notes {
+	color: #666;
+	font-style: italic;
+	font-size: smaller;
+}
+
+.formField .notes .first_line {
+	background: url(../image/error.png) center left no-repeat;
+	padding-left: 20px;
+}
