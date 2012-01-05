@@ -11,7 +11,7 @@
 				success : function(response) {
 					if (response.success) {
 						if (response.url) {
-							window.location = response.url;
+							window.location.href = "success.jsp";
 						} else {
 							console.error("Uh-oh do not know what to do, response was sucessful but no url specified.");
 						}
