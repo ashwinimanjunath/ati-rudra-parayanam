@@ -2,7 +2,7 @@
 <%@ page import="java.util.Map" %>
 <%
     final String email = RequestUtils.email (request, "email");
-    final String yob = RequestUtils.date(request, "yob");
+    final String yob = RequestUtils.optional(request, "yob", "\\d{4}");
     
     final Map<String, String> errors = RequestUtils.errors (request);
     if (!errors.isEmpty ()) {

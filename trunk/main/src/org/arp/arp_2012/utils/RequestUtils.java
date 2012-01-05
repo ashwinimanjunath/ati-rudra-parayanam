@@ -7,12 +7,14 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class RequestUtils {
 
+	private static final String SUCCESS_URL = "SUCCESS_URL";
 	public static final String VALIDATION_ERRORS = "validation_errors";
 	private static Properties messages = new Properties();
 
@@ -51,6 +53,21 @@ public class RequestUtils {
 		return validationErrors;
 	}
 
+	public static final String json(final Object obj) {
+		final ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(obj);
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static final String optional(final HttpServletRequest request,
+			final String paramName, final String regex) {
+		return param(request, paramName, Pattern.compile(regex), true,
+				paramName);
+	}
+
 	public static final String optional(final HttpServletRequest request,
 			final String paramName, final Pattern regex) {
 		return param(request, paramName, regex, true, paramName);
@@ -74,6 +91,13 @@ public class RequestUtils {
 	public static final String param(final HttpServletRequest request,
 			final String paramName, final Pattern regex, final boolean optional) {
 		return param(request, paramName, regex, optional, paramName);
+	}
+
+	public static final String param(final HttpServletRequest request,
+			final String paramName, final String regex, final boolean optional,
+			final String messageKey) {
+		return param(request, paramName, Pattern.compile(regex), optional,
+				messageKey);
 	}
 
 	public static final String param(final HttpServletRequest request,
@@ -101,12 +125,29 @@ public class RequestUtils {
 		return null;
 	}
 
-	public static final String json(final Object obj) {
-		final ObjectMapper mapper = new ObjectMapper();
+	public static String successUrl(final HttpServletRequest request) {
+		final String url = (String) request.getSession().getAttribute(
+				SUCCESS_URL);
+		if (StringUtils.isBlank(url)) {
+			return "/index.jsp";
+		} else {
+			return url;
+		}
+	}
+
+	public static final String successUrl(final HttpServletRequest request,
+			final String url) {
+		request.getSession().setAttribute(SUCCESS_URL, url);
+		return successUrl(request);
+	}
+
+	public static final void succeed(final HttpServletRequest request,
+			final HttpServletResponse response) {
 		try {
-			return mapper.writeValueAsString(obj);
-		} catch (final Exception e) {
-			throw new RuntimeException(e);
+			request.getRequestDispatcher(successUrl(request)).forward(request,
+					response);
+		} catch (Exception e) {
+			throw new RuntimeException();
 		}
 	}
 
