@@ -22,11 +22,11 @@
                         <form id="editRegistrationForm">
                             <div class="formField">
                                 <span class="label">E-mail Address</span>
-                                <input type="text" value="" name="email" />
+                                <input type="text" value="" name="emailAddress" />
                             </div>
                             <div class="formField">
                                 <span class="label">4 digit year of birth</span>
-                                <input type="text" value="" name="yob" maxlength=4 />
+                                <input type="text" value="" name="yearOfBirth" maxlength=4 />
                             </div>
                             <a class="button" id="editRegistration">
                                 <span>Edit</span>

@@ -7,14 +7,14 @@
                     <li>
                         <div class="prod_holder">
                             <a href="<%=cp%>jsp/html/register_new_return.jsp">
-                                <img src="image/register.png" alt="Spicylicious store" />
+                                <img src="<%= cp %>image/register.png" alt="Spicylicious store" />
                             </a>
                         </div>
                     </li>
                     <li>
                         <div class="prod_holder">
                             <a href="#">
-                                <img src="image/snow-clad-himalayas-wallpapers.jpg" alt="Spicylicious store" />
+                                <img src="<%= cp %>image/snow-clad-himalayas-wallpapers.jpg" alt="Spicylicious store" />
                             </a>
                             <h3>The Himalayas</h3>
                         </div>
@@ -22,7 +22,7 @@
                     <li>
                         <div class="prod_holder">
                             <a href="#">
-                                <img src="image/lake_manas_sarovar.jpg" alt="Spicylicious store" />
+                                <img src="<%= cp %>image/lake_manas_sarovar.jpg" alt="Spicylicious store" />
                             </a>
                             <h3>Manasa Sarovar</h3>
                         </div>
@@ -30,7 +30,7 @@
                     <li>
                         <div class="prod_holder">
                             <a href="#">
-                                <img src="image/kailash_lingam.jpg" alt="Spicylicious store" />
+                                <img src="<%= cp %>image/kailash_lingam.jpg" alt="Spicylicious store" />
                             </a>
                             <h3>Kailasha Lingam</h3>
                         </div>

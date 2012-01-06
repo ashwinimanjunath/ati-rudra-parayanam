@@ -7,7 +7,7 @@
 <title>Ati Rudra Parayanam - 2012</title>
 <link rel="stylesheet" href="<%=cp%>stylesheet/stylesheet.css" type="text/css" media="screen" />
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
-<link rel="stylesheet" type="text/css" href="<%=cp%>stylesheet/jquery-ui-1.8.9.custom.css" />
+<link rel="stylesheet" type="text/css" href="<%=cp%>stylesheet/aristo/jquery-ui-1.8.7.custom.css" />
 <!-- jQuery and Custom scripts -->
 <script src="<%=cp%>js/jquery-1.5.2.min.js" type="text/javascript"></script>
 <script src="<%=cp%>js/jquery.cycle.lite.1.0.min.js" type="text/javascript"></script>
@@ -29,16 +29,12 @@
         <div id="header">
             <div class="inner">
                 <div id="logo">
-                    <a href="index.html">
+                    <a href="<%= cp %>/jsp/html/index.jsp">
                         <img src="<%= cp %>image/logo.png" width="217" height="141" alt="Spicylicious store" />
                     </a>
                 </div>
                 <div id="welcome">
-                    Namaste! Please
-                    <a href="#">login</a>
-                    or
-                    <a href="#">create an account</a>
-                    .
+                    Namaste! <span style = "font-style: italic;">(Namo + Aste = "I bow to you" )</span>
                 </div>
                 <div class="menu">
                     <ul id="topnav">
@@ -54,6 +50,9 @@
                                         Register
                                         <span style="font-size: smaller; font-style: italic;">(Closes Jan/30/12)</span>
                                     </a>
+                                </li>
+                                <li>
+                                    <a href = "<%= cp %>/KM12-Medical-certificate-Overseas.pdf" target = "_blank">Physical Fitness Form</a>
                                 </li>
                                 <li>
                                     <a href="category.html">Itinerary</a>
