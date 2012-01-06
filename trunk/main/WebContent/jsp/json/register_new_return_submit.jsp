@@ -2,8 +2,8 @@
 <%@ page import="org.arp.arp_2012.utils.RequestUtils"%>
 <%@ page import="java.util.Map"%>
 <%
-	final String email = RequestUtils.email(request, "email");
-	final String yob = RequestUtils.param(request, "yob",
+    final String email = RequestUtils.email(request, "emailAddress");
+	final String yob = RequestUtils.param(request, "yearOfBirth",
 			Pattern.compile("\\d{4}"), false);
 
 	final Map<String, String> errors = RequestUtils.errors(request);

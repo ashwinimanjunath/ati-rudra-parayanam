@@ -270,7 +270,8 @@ ul.main_menu li a:hover,ul.main_menu li a.active {
 
 #header #welcome {
 	color: #FFF;
-	float: right; margin : 50px 0px 20px 0;
+	float: right;
+	margin: 50px 0px 20px 0;
 	text-align: right;
 	white-space: nowrap;
 	margin: 50px 0px 20px 0;
@@ -2813,17 +2814,18 @@ h1.oops {
 	color: red;
 }
 
-.formField .text, .formField .textarea, .formField .select {
+.formField .text,.formField .textarea,.formField .select {
 	width: 20em;
+	background-color: white;
 }
 
 .helpText {
 	font-size: smaller;
 	font-style: italic;
-	color: #BBB	
+	color: #BBB
 }
 
-.formField .notes {
+.formField .notes,.formField .notes .text {
 	color: #666;
 	font-style: italic;
 	font-size: smaller;

@@ -1,5 +1,5 @@
 package org.arp.arp_2012;
 
 public enum ImmigrationStatus {
-	GC, VISA, CITIZEN, TRANSIT;
+	CANADIAN, INDIAN_CITIZEN, US_CITIZEN, US_GC, OTHER;
 }

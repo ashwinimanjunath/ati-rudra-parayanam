@@ -6,33 +6,19 @@ public final class Registration {
 
 	private String lastName;
 
-	private String nationality;
-
 	private Gender gender;
-
-	private String passportNumber;
 
 	private String dateOfBirth;
 
-	private String passportExpiryDate;
+	private ImmigrationStatus immigrationStatus = ImmigrationStatus.US_GC;
 
-	private String passportIssueDate;
+	private String cityOfDeparture;
 
-	private ImmigrationStatus immigrationStatus;
+	private String dateOfDeparture = "06/21/2012";
 
-	private String portOfDeparture;
-
-	private String dateOfDeparture;
-
-	private String portOfArrival;
-
-	private String dateOfArrival;
+	private String cityOfArrival;
 
 	private String emailAddress;
-
-	public String getDateOfArrival() {
-		return dateOfArrival;
-	}
 
 	public String getDateOfBirth() {
 		return dateOfBirth;
@@ -62,32 +48,12 @@ public final class Registration {
 		return lastName;
 	}
 
-	public String getNationality() {
-		return nationality;
+	public String getCityOfArrival() {
+		return cityOfArrival;
 	}
 
-	public String getPassportExpiryDate() {
-		return passportExpiryDate;
-	}
-
-	public String getPassportIssueDate() {
-		return passportIssueDate;
-	}
-
-	public String getPassportNumber() {
-		return passportNumber;
-	}
-
-	public String getPortOfArrival() {
-		return portOfArrival;
-	}
-
-	public String getPortOfDeparture() {
-		return portOfDeparture;
-	}
-
-	public void setDateOfArrival(String dateOfArrival) {
-		this.dateOfArrival = dateOfArrival;
+	public String getCityOfDeparture() {
+		return cityOfDeparture;
 	}
 
 	public void setDateOfBirth(String dateOfBirth) {
@@ -110,7 +76,7 @@ public final class Registration {
 		this.gender = gender;
 	}
 
-	public void setImmigrationStatus(ImmigrationStatus immigrationStatus) {
+	public void setImmigrationStatus(final ImmigrationStatus immigrationStatus) {
 		this.immigrationStatus = immigrationStatus;
 	}
 
@@ -118,27 +84,11 @@ public final class Registration {
 		this.lastName = lastName;
 	}
 
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
+	public void setCityOfArrival(String portOfArrival) {
+		this.cityOfArrival = portOfArrival;
 	}
 
-	public void setPassportExpiryDate(String passportExpiryDate) {
-		this.passportExpiryDate = passportExpiryDate;
-	}
-
-	public void setPassportIssueDate(String passportIssueDate) {
-		this.passportIssueDate = passportIssueDate;
-	}
-
-	public void setPassportNumber(String passportNumber) {
-		this.passportNumber = passportNumber;
-	}
-
-	public void setPortOfArrival(String portOfArrival) {
-		this.portOfArrival = portOfArrival;
-	}
-
-	public void setPortOfDeparture(String portOfDeparture) {
-		this.portOfDeparture = portOfDeparture;
+	public void setCityOfDeparture(String portOfDeparture) {
+		this.cityOfDeparture = portOfDeparture;
 	}
 }

@@ -1,3 +1,5 @@
+<%@page import="org.arp.arp_2012.utils.RequestUtils"%>
+<%@page import="java.util.Map"%>
 <%@include file="/WEB-INF/jsp/common/header.jsp"%>
 <div class="inner">
     <h2 class="heading-title">
@@ -9,27 +11,54 @@
                 <div class="box-content fixed">
                     <div class="stitched"></div>
                     <div class="left" style="width: 100%; height: auto;">
-                        <form id="editRegistrationForm">
+                        <form action="<%=cp%>jsp/html/save_registration.jsp" enctype="multipart/form-data"
+                            id="editRegistrationForm" method = "post"
+                        >
                             <div class="formField">
                                 <span class="label">E-mail Address</span>
-                                <input type="text" value="" name="email" class="text" />
+                                <input type="text" value="" name="emailAddress" class="text" />
                             </div>
                             <div class="formField">
                                 <span class="label">Date of Birth</span>
-                                <input type="text" value="" name="yob" class="text" maxlength=4 />
+                                <input type="text" value="" name="dateOfBirth" class="text" maxlength=10 />
                                 <div class="helpText">MM/DD/YYYY</div>
                             </div>
                             <div class="formField">
+                                <span class="label">First Name (as in passport)</span>
+                                <input type="text" value="" name="firstName" class="text" />
+                            </div>
+                            <div class="formField">
+                                <span class="label">Last Name (as in passport)</span>
+                                <input type="text" value="" name="lastName" class="text" />
+                            </div>
+                            <div class="formField">
+                                <span class="label">Gender</span>
+                                <div style="background-color: #FFF;padding: 4px;width: 20em">
+                                <input type="radio" name="gender" value="MALE" />
+                                Male
+                                <input type="radio" name="gender" value="FEMALE" />
+                                Female
+                                </div>
+                            </div>
+                            <div class="formField">
+                                <span class="label">Citizenship / Immigration Status</span>
+                                <select class="select" name="immigrationStatus">
+                                    <option value="CANADIAN">Canadian Citizen</option>
+                                    <option value="INDIAN_CITIZEN">Indian Citizen</option>
+                                    <option value="US_CITIZEN">U.S. Citizen</option>
+                                    <option selected="selected" value="US_GC">U.S. Green Card Holder</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="formField">
                                 <div style="float: left; width: 40%">
-                                    <span class="label">Country of Departure</span>
-                                    <select class="select">
-                                        <option value="canada">Canada</option>
-                                        <option value="india">India</option>
-                                        <option value="usa" selected="selected">United States of America</option>
-                                    </select>
+                                    <span class="label">City of Departure</span>
+                                    <input type="text" class="text port" name="cityOfDeparture" disabled="disabled"
+                                        value="Loading ..."
+                                    />
                                 </div>
                                 <div class="notes" style="float: right; width: 60%">
-                                    <div class="first_line">If you are flying from India you will have to make
+                                    <div class="first_line">If you are flying to/from India you will have to make
                                         your own arrangements</div>
                                     <div>
                                         with your travel agent to arrive in
@@ -42,44 +71,48 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="formField">
-                                <span class="label">Port of Departure</span>
-                                <select class="select">
-                                    <option value="canada">Canada</option>
-                                    <option value="india">India</option>
-                                    <option value="US" selected="selected">United States of America</option>
-                                </select>
-                                <div class="helpText">MM/DD/YYYY</div>
+                                <div style="float: left; width: 40%">
+                                    <span class="label">Date of Departure</span>
+                                    <input type="text" value="" name="dateOfDeparture" class="text" maxlength=4 />
+                                    <div class="helpText">MM/DD/YYYY</div>
+                                </div>
+                                <div class="notes" style="float: right; width: 60%">
+                                    <span class="label">&nbsp;</span>
+                                    <span>Leaving on</span>
+                                    <input type="text" class="text"
+                                        style="font-size: small; background: transparent; border: none;"
+                                        id="date-of-departure-complete" readonly="readonly"
+                                    >
+                                </div>
+                                <div class="clear"></div>
                             </div>
                             <div class="formField">
-                                <span class="label">Country of Departure</span>
-                                <select class="select">
-                                    <option value="canada">Canada</option>
-                                    <option value="india">India</option>
-                                    <option value="US" selected="selected">United States of America</option>
-                                </select>
-                                <div class="helpText">MM/DD/YYYY</div>
+                                <span class="label">City of Arrival</span>
+                                <input type="text" class="text port" name="cityOfArrival" disabled="disabled"
+                                    value="Loading ..."
+                                />
                             </div>
                             <div class="formField">
-                                <span class="label">Country of Departure</span>
-                                <select class="select">
-                                    <option value="canada">Canada</option>
-                                    <option value="india">India</option>
-                                    <option value="US" selected="selected">United States of America</option>
-                                </select>
-                                <div class="helpText">MM/DD/YYYY</div>
+                                <div style="float: left; width: 40%">
+                                    <span class="label">Physical Fitness Form</span>
+                                    <input type="file" class="text port" name="form" disabled="disabled"
+                                        value="Loading ..."
+                                    />
+                                    <a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf" target="_blank"
+                                        style="display: block; margin-top: 5px"
+                                        title="Right Click, then click save link/target as"
+                                    >Download Blank Form Here</a>
+                                </div>
+                                <div class="notes" style="float: right; width: 60%">
+                                    <div class="first_line">This requirement is mandatory.</div>
+                                    <div>We strongly believe that Swami's grace will help us accomplish this
+                                        pilgrimage irrespective of our age, physical, mental and spiritual fitness. Thus
+                                        please treat this as important but routine.</div>
+                                </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="formField">
-                                <span class="label">Country of Departure</span>
-                                <select class="select">
-                                    <option value="canada">Canada</option>
-                                    <option value="india">India</option>
-                                    <option value="US" selected="selected">United States of America</option>
-                                </select>
-                                <div class="helpText">MM/DD/YYYY</div>
-                            </div>
-                            <br />
-                            <br />
-                            <a class="button" id="editRegistration">
+                            <div style='margin: 20px'>&nbsp;</div>
+                            <a class="button" id="editRegistration" style="display: none">
                                 <span>Save</span>
                             </a>
                         </form>
@@ -91,7 +124,26 @@
     </div>
     <div class="clear"></div>
 </div>
-<link href="<%=cp%>stylesheet/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=cp%>js/jquery.autocomplete.js"></script>
+<script type="text/javascript">
+	window.validationErrors = <%= RequestUtils.json(RequestUtils.errors(request))%>;
+	window.registration = <%= RequestUtils.json(RequestUtils.registration(request))%>;
+</script>
+
 <script type="text/javascript" src="<%=cp%>js/app/edit_registration.js"></script>
+<style>
+.ui-autocomplete {
+	max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	/* add padding to account for vertical scrollbar */
+	padding-right: 20px;
+}
+/* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+* html .ui-autocomplete {
+	height: 200px;
+}
+</style>
 <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
