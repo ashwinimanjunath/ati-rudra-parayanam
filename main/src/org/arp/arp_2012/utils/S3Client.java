@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 
@@ -50,8 +51,10 @@ public class S3Client {
 			final ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(bytes.length);
 			meta.setContentType(contentType);
-			PutObjectResult response = s3.putObject(BUCKET_NAME, fileName,
-					new ByteArrayInputStream(bytes), meta);
+			final PutObjectRequest request = new PutObjectRequest(BUCKET_NAME,
+					fileName, new ByteArrayInputStream(bytes), meta);
+			request.withCannedAcl(CannedAccessControlList.PublicRead);
+			PutObjectResult response = s3.putObject(request);
 			return response;
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
