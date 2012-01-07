@@ -1,3 +1,6 @@
+<%@page import="org.arp.arp_2012.utils.S3Client"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="org.arp.arp_2012.utils.GoogleDocsClient"%>
 <%@page import="org.arp.arp_2012.Gender"%>
 <%@page import="org.apache.commons.fileupload.FileItemFactory"%>
 <%@page import="org.apache.commons.fileupload.util.Streams"%>
@@ -13,15 +16,21 @@
 	final ServletFileUpload upload = new ServletFileUpload();
 
 	final Map<String, String> params = new HashMap<String, String>();
+	final Map<String, byte[]> files = new HashMap<String, byte[]>();
 	final FileItemIterator iterator = upload.getItemIterator(request);
 	while (iterator.hasNext()) {
 		final FileItemStream item = iterator.next();
 		if (item.isFormField()) {
-            final String paramValue = Streams.asString(item.openStream());
-			params.put(item.getFieldName(),paramValue);
+			final String paramValue = Streams.asString(item
+					.openStream());
+			params.put(item.getFieldName(), paramValue);
 		} else {
-			params.put(item.getFieldName(), item.getName());
-        }
+            params.put(item.getFieldName(), item.getName());
+            final ByteArrayOutputStream bos = new ByteArrayOutputStream ();
+            Streams.copy(item.openStream(), bos, true);
+            final byte[] fileContents = bos.toByteArray();
+			files.put(item.getFieldName(), fileContents);
+		}
 	}
 
 	final Registration registration = RequestUtils
@@ -29,14 +38,14 @@
 
 	registration.setEmailAddress(RequestUtils.email(request,
 			"emailAddress", params.get("emailAddress")));
-	registration.setDateOfBirth(RequestUtils.email(request,
-			"dateOfBirth", params.get("dob")));
+	registration.setDateOfBirth(RequestUtils.date(request,
+			"dateOfBirth", params.get("dateOfBirth")));
 	registration.setFirstName(RequestUtils.string(request, "firstName",
 			params.get("firstName")));
 	registration.setLastName(RequestUtils.string(request, "lastName",
 			params.get("lastName")));
-    registration.setGender(RequestUtils.enuM(request, "gender",
-            params.get("gender"), Gender.class));
+	registration.setGender(RequestUtils.enuM(request, "gender",
+			params.get("gender"), Gender.class));
 	registration.setImmigrationStatus(RequestUtils.enuM(request,
 			"immigrationStatus", params.get("immigrationStatus"),
 			ImmigrationStatus.class));
@@ -46,12 +55,14 @@
 			"dateOfDeparture", params.get("dateOfDeparture")));
 	registration.setCityOfArrival(RequestUtils.string(request,
 			"cityOfArrival", params.get("cityOfArrival")));
-    
-	RequestUtils.string(request,
-			"physicalFitnessForm", params.get("physicalFitnessForm"));
-    if (RequestUtils.errors(request).isEmpty()) {
-        //Save the file to google docs
-        
-    }
+
+	RequestUtils.string(request, "physicalFitnessForm",
+			params.get("physicalFitnessForm"));
+	if (RequestUtils.errors(request).isEmpty()) {
+        final byte[] fileContents = files.get("physicalFitnessForm");
+		//Save the file to google docs
+        final S3Client client = new S3Client();
+        client.saveFile(registration.getEmailAddress().toLowerCase() + ".pdf", fileContents);
+	}
 %>
 <jsp:forward page="/WEB-INF/jsp/edit_registration.jsp" />
