@@ -18,4 +18,17 @@
 		enabled="true" /> With this feature enabled, there is a very small chance 
 		your app will see stale session data. For details, see http://code.google.com/appengine/docs/java/config/appconfig.html#Enabling_Sessions -->
 
+	<static-files>
+		<include path="/**.png" />
+		<include path="/**.css" />
+		<include path="/**.gif" />
+		<include path="/**.jpg" />
+		<include path="/**.html" />
+		<include path="/**.js" />
+		<include path="/**.pdf" />
+	</static-files>
+	<resource-files>
+		<include path="/**.properties" />
+	</resource-files>
+
 </appengine-web-app>
