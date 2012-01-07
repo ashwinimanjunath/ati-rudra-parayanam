@@ -19,11 +19,9 @@
 		if (item.isFormField()) {
             final String paramValue = Streams.asString(item.openStream());
 			params.put(item.getFieldName(),paramValue);
-            System.out.printf ("%s, %s\n", item.getFieldName(),paramValue);
-            
 		} else {
-
-		}
+			params.put(item.getFieldName(), item.getName());
+        }
 	}
 
 	final Registration registration = RequestUtils
@@ -48,5 +46,12 @@
 			"dateOfDeparture", params.get("dateOfDeparture")));
 	registration.setCityOfArrival(RequestUtils.string(request,
 			"cityOfArrival", params.get("cityOfArrival")));
+    
+	RequestUtils.string(request,
+			"physicalFitnessForm", params.get("physicalFitnessForm"));
+    if (RequestUtils.errors(request).isEmpty()) {
+        //Save the file to google docs
+        
+    }
 %>
 <jsp:forward page="/WEB-INF/jsp/edit_registration.jsp" />
