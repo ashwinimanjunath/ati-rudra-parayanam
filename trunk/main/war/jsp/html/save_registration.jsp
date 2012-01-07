@@ -1,6 +1,5 @@
 <%@page import="org.arp.arp_2012.utils.S3Client"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
-<%@page import="org.arp.arp_2012.utils.GoogleDocsClient"%>
 <%@page import="org.arp.arp_2012.Gender"%>
 <%@page import="org.apache.commons.fileupload.FileItemFactory"%>
 <%@page import="org.apache.commons.fileupload.util.Streams"%>
