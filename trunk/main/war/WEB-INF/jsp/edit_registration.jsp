@@ -95,7 +95,7 @@
                             <div class="formField">
                                 <div style="float: left; width: 40%">
                                     <span class="label">Physical Fitness Form</span>
-                                    <input type="file" class="text port" name="form" disabled="disabled"
+                                    <input type="file" class="text port" name="physicalFitnessForm" disabled="disabled"
                                         value="Loading ..."
                                     />
                                     <a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf" target="_blank"
