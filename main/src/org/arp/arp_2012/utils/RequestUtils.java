@@ -216,7 +216,7 @@ public class RequestUtils {
 
 	public static final Registration registration(
 			final HttpServletRequest request, final Registration registration) {
-		request.getSession().setAttribute(SESSION_KEY_REGISTRATION,
+		request.getSession(true).setAttribute(SESSION_KEY_REGISTRATION,
 				registration);
 		return registration(request);
 	}
