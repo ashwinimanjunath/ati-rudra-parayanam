@@ -1,4 +1,6 @@
-<% final String cp = ""; %>
+<%
+	final String cp = "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -18,7 +20,7 @@
 <script src="<%=cp%>js/tipsy/jquery.tipsy.js" type="text/javascript"></script>
 <link href="<%=cp%>js/tipsy/css.tipsy.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-	window.cp = "<%=cp%>";
+	window.cp = "<%= cp %>";
 </script>
 </head>
 <body>
@@ -28,17 +30,18 @@
         <div id="header">
             <div class="inner">
                 <div id="logo">
-                    <a href="<%= cp %>/jsp/html/index.jsp">
-                        <img src="<%= cp %>image/logo.png" width="217" height="141" alt="Spicylicious store" />
+                    <a href="<%=cp%>/jsp/html/index.jsp">
+                        <img src="<%=cp%>image/logo.png" width="217" height="141" alt="Spicylicious store" />
                     </a>
                 </div>
                 <div id="welcome">
-                    Namaste! <span style = "font-style: italic;">(Namo + Aste = "I bow to you" )</span>
+                    Namaste!
+                    <span style="font-style: italic;">(Namo + Aste = "I bow to you" )</span>
                 </div>
                 <div class="menu">
                     <ul id="topnav">
                         <li>
-                             <a href="<%= cp %>">Home</a>
+                            <a href="<%=cp%>">Home</a>
                         </li>
                         <li>
                             <a href="category.html" title="Ati Rudra Parayanam at Kailash for 2012">2012 - Kailash
@@ -51,7 +54,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href = "<%= cp %>/KM12-Medical-certificate-Overseas.pdf" target = "_blank">Physical Fitness Form</a>
+                                    <a href="<%=cp%>/KM12-Medical-certificate-Overseas.pdf" target="_blank">Physical
+                                        Fitness Form</a>
                                 </li>
                                 <li>
                                     <a href="category.html">Itinerary</a>

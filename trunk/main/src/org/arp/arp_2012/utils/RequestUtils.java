@@ -1,25 +1,28 @@
 package org.arp.arp_2012.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.StringUtils;
 import org.arp.arp_2012.Registration;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.services.s3.model.S3Object;
+
 public class RequestUtils {
 
-	private static final String SESSION_KEY_REGISTRATION = "registration";
-	private static final String SUCCESS_URL = "SUCCESS_URL";
+	private static final String REGISTRATION_KEY = "registration";
 	public static final String VALIDATION_ERRORS = "validation_errors";
 	private static Properties messages = new Properties();
 
@@ -52,19 +55,9 @@ public class RequestUtils {
 		return param(request, paramName, EMAIL, false);
 	}
 
-	public static final String string(final HttpServletRequest request,
-			final String paramName) {
-		return param(request, paramName, null, false);
-	}
-
 	public static final String email(final HttpServletRequest request,
 			final String paramName, final String paramValue) {
 		return param(request, paramName, paramValue, EMAIL, false, paramName);
-	}
-
-	public static final String string(final HttpServletRequest request,
-			final String paramName, final String paramValue) {
-		return param(request, paramName, paramValue, null, false, paramName);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -98,6 +91,50 @@ public class RequestUtils {
 		return validationErrors;
 	}
 
+	public static final <T> T fromXML(final Class<T> klass, final InputStream is) {
+		try {
+			final JAXBContext context = JAXBContext.newInstance(klass);
+			Unmarshaller m = context.createUnmarshaller();
+			final Object obj = m.unmarshal(is);
+			return klass.cast(obj);
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static final Registration getRegistration(final String email,
+			final int yearOfBirth) {
+		final S3Client client = new S3Client();
+		try {
+			final S3Object xmlObject = client.findFile(generateXMLFileName(
+					email, yearOfBirth));
+			final InputStream is = xmlObject.getObjectContent();
+			try {
+				return fromXML(Registration.class, is);
+			} finally {
+				is.close();
+			}
+
+		} catch (final AmazonClientException e) {
+			// Probably a object not found exception
+			return null;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static boolean hasPhysicalFitnessForm(final Registration registration) {
+		if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())
+				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
+			// Check if the physical fitness form is already with us
+			final String pdfFileName = generatePDFFileName(
+					registration.getEmailAddress(),
+					registration.getYearOfBirth());
+			return new S3Client().doesFileExist(pdfFileName);
+		}
+		return false;
+	}
+
 	public static final String json(final Object obj) {
 		final ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -105,6 +142,12 @@ public class RequestUtils {
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static final Registration newRegistration(
+			final HttpServletRequest request) {
+		registration(request, new Registration());
+		return registration(request);
 	}
 
 	public static final String optional(final HttpServletRequest request,
@@ -163,9 +206,8 @@ public class RequestUtils {
 	}
 
 	public static String param(final HttpServletRequest request,
-			final String paramName, String paramValue,
-			final Pattern regex, final boolean optional, final String messageKey) {
-		final Map<String, String> validationErrors = errors(request);
+			final String paramName, String paramValue, final Pattern regex,
+			final boolean optional, final String messageKey) {
 		if (StringUtils.isBlank(paramValue)) {
 			if (optional) {
 				return null;
@@ -176,55 +218,91 @@ public class RequestUtils {
 			return paramValue;
 		}
 
+		error(request, paramName, messageKey);
+		return null;
+	}
+
+	public static void error(final HttpServletRequest request,
+			final String paramName, final String messageKey) {
+		final Map<String, String> validationErrors = errors(request);
 		final String errorMessage = messages.containsKey(messageKey) ? messages
 				.get(messageKey).toString() : String.format(
 				"Please enter a valid value for %s", paramName);
 		validationErrors.put(paramName, errorMessage);
-		return null;
-	}
-
-	public static final void succeed(final HttpServletRequest request,
-			final HttpServletResponse response) {
-		try {
-			request.getRequestDispatcher(successUrl(request)).forward(request,
-					response);
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-	}
-
-	public static String successUrl(final HttpServletRequest request) {
-		final String url = (String) request.getSession().getAttribute(
-				SUCCESS_URL);
-		if (StringUtils.isBlank(url)) {
-			return "/index.jsp";
-		} else {
-			return url;
-		}
-	}
-
-	public static final String successUrl(final HttpServletRequest request,
-			final String url) {
-		request.getSession().setAttribute(SUCCESS_URL, url);
-		return successUrl(request);
 	}
 
 	public static final Registration registration(HttpServletRequest request) {
-		return (Registration) request.getSession().getAttribute(
-				SESSION_KEY_REGISTRATION);
+		return (Registration) request.getAttribute(REGISTRATION_KEY);
 	}
 
 	public static final Registration registration(
 			final HttpServletRequest request, final Registration registration) {
-		request.getSession(true).setAttribute(SESSION_KEY_REGISTRATION,
-				registration);
+		request.setAttribute(REGISTRATION_KEY, registration);
 		return registration(request);
 	}
 
-	public static final Registration newRegistration(
-			final HttpServletRequest request) {
-		registration(request, new Registration());
-		return registration(request);
+	public static final Registration saveRegistration(
+			final Registration registration, final byte[] physicalFitnessForm) {
+		final S3Client client = new S3Client();
+		if (physicalFitnessForm != null) {
+			// Save the physical fitness form to Amazon S3
+			final String pdfFileName = generatePDFFileName(
+					registration.getEmailAddress(),
+					registration.getYearOfBirth());
+			client.saveFile(pdfFileName, physicalFitnessForm);
+			registration.setPhysicalFitnessForm(pdfFileName);
+		}
+
+		final String xmlFileName = generateXMLFileName(
+				registration.getEmailAddress(), registration.getYearOfBirth());
+
+		// Now save the XML file to amazon
+		final String xml = RequestUtils.xml(registration);
+		client.saveFile(xmlFileName, xml.getBytes());
+
+		return registration;
+	}
+
+	public static final String string(final HttpServletRequest request,
+			final String paramName) {
+		return param(request, paramName, null, false);
+	}
+
+	public static final String string(final HttpServletRequest request,
+			final String paramName, final String paramValue) {
+		return param(request, paramName, paramValue, null, false, paramName);
+	}
+
+	public static final String xml(final Object obj) {
+		try {
+			final JAXBContext context = JAXBContext.newInstance(obj.getClass());
+			Marshaller m = context.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			final StringWriter writer = new StringWriter();
+			m.marshal(obj, writer);
+			return writer.getBuffer().toString();
+		} catch (final Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static String generatePDFFileName(final Registration registration) {
+		if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())
+				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
+			return generatePDFFileName(registration.getEmailAddress(),
+					registration.getYearOfBirth());
+		}
+		return "";
+	}
+
+	private static String generatePDFFileName(final String email,
+			final int yearOfBirth) {
+		return email.toLowerCase() + "-" + yearOfBirth + ".pdf";
+	}
+
+	private static String generateXMLFileName(final String email,
+			final int yearOfBirth) {
+		return email.toLowerCase() + "-" + yearOfBirth + ".xml";
 	}
 
 	private RequestUtils() {

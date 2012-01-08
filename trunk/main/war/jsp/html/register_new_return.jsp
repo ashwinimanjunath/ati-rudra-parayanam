@@ -1,3 +1,4 @@
+<%@page import="org.arp.arp_2012.utils.RequestUtils"%>
 <%@include file="/WEB-INF/jsp/common/header.jsp" %>
 <div class="inner">
     <h2 class="heading-title">
@@ -19,7 +20,7 @@
                     </div>
                     <div class="right">
                         <h6>Edit an existing registration</h6>
-                        <form id="editRegistrationForm">
+                        <form id="editRegistrationForm" action = "<%= cp %>jsp/html/register_new_return_submit.jsp" method = "post">
                             <div class="formField">
                                 <span class="label">E-mail Address</span>
                                 <input type="text" value="" name="emailAddress" />
@@ -41,4 +42,9 @@
     <div class="clear"></div>
 </div>
 <script type="text/javascript" src="<%= cp %>js/app/register_new_return.js"></script>
+<script type="text/javascript">
+    window.validationErrors = <%= RequestUtils.json(RequestUtils.errors(request))%>;
+    window.editRegistration = <%= RequestUtils.json(request.getParameterMap())%>;
+</script>
+
 <%@include file="/WEB-INF/jsp/common/footer.jsp" %>

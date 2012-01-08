@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.arp.arp_2012.utils.S3Client"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="org.arp.arp_2012.Gender"%>
@@ -24,16 +25,16 @@
 					.openStream());
 			params.put(item.getFieldName(), paramValue);
 		} else {
-            params.put(item.getFieldName(), item.getName());
-            final ByteArrayOutputStream bos = new ByteArrayOutputStream ();
-            Streams.copy(item.openStream(), bos, true);
-            final byte[] fileContents = bos.toByteArray();
+			params.put(item.getFieldName(), item.getName());
+			final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			Streams.copy(item.openStream(), bos, true);
+			final byte[] fileContents = bos.toByteArray();
 			files.put(item.getFieldName(), fileContents);
 		}
 	}
 
 	final Registration registration = RequestUtils
-			.registration(request);
+			.newRegistration(request);
 
 	registration.setEmailAddress(RequestUtils.email(request,
 			"emailAddress", params.get("emailAddress")));
@@ -55,13 +56,14 @@
 	registration.setCityOfArrival(RequestUtils.string(request,
 			"cityOfArrival", params.get("cityOfArrival")));
 
-	RequestUtils.string(request, "physicalFitnessForm",
-			params.get("physicalFitnessForm"));
+	if (!RequestUtils.hasPhysicalFitnessForm(registration)) {
+		//Check for the physical fitness form only if he has not uploaded it previously
+		RequestUtils.string(request, "physicalFitnessForm",
+				params.get("physicalFitnessForm"));
+	}
 	if (RequestUtils.errors(request).isEmpty()) {
         final byte[] fileContents = files.get("physicalFitnessForm");
-		//Save the file to google docs
-        final S3Client client = new S3Client();
-        client.saveFile(registration.getEmailAddress().toLowerCase() + ".pdf", fileContents);
+        RequestUtils.saveRegistration(registration, fileContents);
 	}
 %>
 <jsp:forward page="/WEB-INF/jsp/edit_registration.jsp" />

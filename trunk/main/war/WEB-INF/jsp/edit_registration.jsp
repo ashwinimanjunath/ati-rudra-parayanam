@@ -1,6 +1,11 @@
+<%@page import="org.arp.arp_2012.Registration"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.arp.arp_2012.utils.RequestUtils"%>
 <%@page import="java.util.Map"%>
 <%@include file="/WEB-INF/jsp/common/header.jsp"%>
+<%
+    Registration registration = RequestUtils.registration(request);
+%>
 <div class="inner">
     <h2 class="heading-title">
         <span>Registration</span>
@@ -12,8 +17,7 @@
                     <div class="stitched"></div>
                     <div class="left" style="width: 100%; height: auto;">
                         <form action="<%=cp%>jsp/html/save_registration.jsp" enctype="multipart/form-data"
-                            id="editRegistrationForm" method = "post"
-                        >
+                            id="editRegistrationForm" method = "post">
                             <div class="formField">
                                 <span class="label">E-mail Address</span>
                                 <input type="text" value="" name="emailAddress" class="text" />
@@ -94,9 +98,18 @@
                             </div>
                             <div class="formField">
                                 <div style="float: left; width: 40%">
-                                    <span class="label">Physical Fitness Form</span>
+                                    <span class="label">
+                                        <span>Physical Fitness Form</span>
+<%
+    if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())) {
+%>
+                                    <a href = "http://sai-arp-2012-registration.s3-website-us-west-1.amazonaws.com/<%= RequestUtils.generatePDFFileName(registration) %>" type = "button" onclick = "return false;" target = "_blank" style = "padding-left: 100px" title = "Download your previously uploaded form"><span>Download</span></a>
+<%        
+    }
+%>                                    
+                                        
+                                    </span>
                                     <input type="file" class="text port" name="physicalFitnessForm" disabled="disabled"
-                                        value="Loading ..."
                                     />
                                     <a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf" target="_blank"
                                         style="display: block; margin-top: 5px"
@@ -126,7 +139,7 @@
 </div>
 <script type="text/javascript">
 	window.validationErrors = <%= RequestUtils.json(RequestUtils.errors(request))%>;
-	window.registration = <%= RequestUtils.json(RequestUtils.registration(request))%>;
+	window.registration = <%= RequestUtils.json(registration)%>;
 </script>
 
 <script type="text/javascript" src="<%=cp%>js/app/edit_registration.js"></script>

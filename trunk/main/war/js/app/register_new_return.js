@@ -1,26 +1,28 @@
 (function($) {
 	$(function() {
-		$("#editRegistration").click(function() {
-			$("#editRegistrationForm").ajaxSubmit({
-				url : window.cp + "jsp/json/register_new_return_submit.jsp",
-				dataType : "json",
-				type : "post",
-				beforeSubmit : function() {
-					$("#editRegistrationForm").find(".error").removeClass("error").end().find(".error_message").remove();
-				},
-				success : function(response) {
-					if (response.success) {
-						window.location.href = window.cp + "success.jsp";
-					} else {
-						var $form = $("#editRegistrationForm");
-						var errors = response.errors;
-						for ( var key in errors) {
-							$form.find("[name=" + key + "]").addClass("error").after("<div class = 'error_message'>" + errors[key] + "</div>");
-						}
-					}
-				}
-			});
+		var $form = $("#editRegistrationForm");
 
+		// first populate all the registration fields with proper values
+		var editRegistration = window.editRegistration;
+		for ( var property in editRegistration) {
+			var $e = $form.find("[name=" + property + "]");
+			if ($e.is (":radio")) {
+				$form.find("[name=" + property + "][value=" + editRegistration[property] + "]").attr("checked", true);
+			} else {
+				$e.val(editRegistration[property]);
+			}
+		}
+
+		// Now update error messages if any
+		var errors = window.validationErrors;
+		for (var property in errors) {
+			var $e = $form.find("[name=" + property + "]");
+			var $errorDiv = $e.is (":radio") ? $e.parent ("div") : $e;
+			$errorDiv.addClass("error").after("<div class = 'error_message'>" + errors[property] + "</div>");
+		}
+
+		$("#editRegistration").click(function() {
+			$form.submit ();
 			return false;
 		});
 	});

@@ -2,6 +2,8 @@ package org.arp.arp_2012.utils;
 
 import java.io.ByteArrayInputStream;
 
+import javax.activation.MimeType;
+
 import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -10,13 +12,14 @@ import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.amazonaws.services.s3.model.Region;
 import com.amazonaws.services.s3.model.S3Object;
 
 public class S3Client {
 
 	private final AmazonS3 s3;
 
-	private static final String BUCKET_NAME = "sai-arp-2012-registrations";
+	private static final String BUCKET_NAME = "sai-arp-2012-registration";
 
 	private static boolean bucketExistenceChecked = false;
 
@@ -30,6 +33,7 @@ public class S3Client {
 					final CreateBucketRequest request = new CreateBucketRequest(
 							BUCKET_NAME)
 							.withCannedAcl(CannedAccessControlList.PublicRead);
+					request.setRegion(Region.US_West.toString());
 					s3.createBucket(request);
 				}
 				bucketExistenceChecked = true;
@@ -44,13 +48,21 @@ public class S3Client {
 		return s3.getObject(BUCKET_NAME, fileName);
 	}
 
+	public final boolean doesFileExist(final String fileName) {
+		try {
+			s3.getObjectMetadata(BUCKET_NAME, fileName);
+			return true;
+		} catch (Exception e) {
+		}
+
+		return false;
+	}
+
 	public final PutObjectResult saveFile(final String fileName,
 			final byte[] bytes) {
 		try {
-			final String contentType = "application/pdf";
 			final ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentLength(bytes.length);
-			meta.setContentType(contentType);
 			final PutObjectRequest request = new PutObjectRequest(BUCKET_NAME,
 					fileName, new ByteArrayInputStream(bytes), meta);
 			request.withCannedAcl(CannedAccessControlList.PublicRead);

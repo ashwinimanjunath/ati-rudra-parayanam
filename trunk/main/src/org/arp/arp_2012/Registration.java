@@ -1,5 +1,17 @@
 package org.arp.arp_2012;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+@XmlRootElement
 public final class Registration {
 
 	private String firstName;
@@ -12,13 +24,23 @@ public final class Registration {
 
 	private ImmigrationStatus immigrationStatus = ImmigrationStatus.US_GC;
 
-	private String cityOfDeparture;
+	private String cityOfDeparture = "Tribhuvan International Airport (KTM, Kathmandu, Nepal)";
 
 	private String dateOfDeparture = "06/21/2012";
 
 	private String cityOfArrival;
 
 	private String emailAddress;
+
+	private String physicalFitnessForm = null;
+
+	public String getCityOfArrival() {
+		return cityOfArrival;
+	}
+
+	public String getCityOfDeparture() {
+		return cityOfDeparture;
+	}
 
 	public String getDateOfBirth() {
 		return dateOfBirth;
@@ -48,12 +70,16 @@ public final class Registration {
 		return lastName;
 	}
 
-	public String getCityOfArrival() {
-		return cityOfArrival;
+	public String getPhysicalFitnessForm() {
+		return physicalFitnessForm;
 	}
 
-	public String getCityOfDeparture() {
-		return cityOfDeparture;
+	public void setCityOfArrival(String portOfArrival) {
+		this.cityOfArrival = portOfArrival;
+	}
+
+	public void setCityOfDeparture(String portOfDeparture) {
+		this.cityOfDeparture = portOfDeparture;
 	}
 
 	public void setDateOfBirth(String dateOfBirth) {
@@ -84,11 +110,23 @@ public final class Registration {
 		this.lastName = lastName;
 	}
 
-	public void setCityOfArrival(String portOfArrival) {
-		this.cityOfArrival = portOfArrival;
+	public void setPhysicalFitnessForm(String physicalFitnessForm) {
+		this.physicalFitnessForm = physicalFitnessForm;
 	}
 
-	public void setCityOfDeparture(String portOfDeparture) {
-		this.cityOfDeparture = portOfDeparture;
+	@JsonIgnore
+	@XmlTransient
+	public int getYearOfBirth() {
+		if (!StringUtils.isBlank(dateOfBirth)) {
+			try {
+				final Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(dateOfBirth);
+				final Calendar cal = Calendar.getInstance();
+				cal.setTime(dob);
+				return cal.get(Calendar.YEAR);
+			} catch (ParseException e) {
+				//Do nothing, illegal date entered
+			}
+		}
+		return 0;
 	}
 }
