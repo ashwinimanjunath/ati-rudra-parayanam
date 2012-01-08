@@ -18,6 +18,7 @@
 <script src="<%=cp%>js/tabs.js" type="text/javascript"></script>
 <script src="<%=cp%>js/jquery.form.js" type="text/javascript"></script>
 <script src="<%=cp%>js/tipsy/jquery.tipsy.js" type="text/javascript"></script>
+<script src="<%=cp%>js/pdfobject.js" type="text/javascript"></script>
 <link href="<%=cp%>js/tipsy/css.tipsy.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	window.cp = "<%= cp %>";
@@ -30,7 +31,7 @@
         <div id="header">
             <div class="inner">
                 <div id="logo">
-                    <a href="<%=cp%>/jsp/html/index.jsp">
+                    <a href="<%=cp%>jsp/html/index.jsp">
                         <img src="<%=cp%>image/logo.png" width="217" height="141" alt="Spicylicious store" />
                     </a>
                 </div>
@@ -79,37 +80,40 @@
                             <a href="<%= cp %>jsp/html/wip.jsp">Namakam</a>
                             <ul class="children">
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 1</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/1.jsp">Anuvakam 1</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 2</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/2.jsp">Anuvakam 2</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 3</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/3.jsp">Anuvakam 3</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 4</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/4.jsp">Anuvakam 4</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 5</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/5.jsp">Anuvakam 5</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 6</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/6.jsp">Anuvakam 6</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 7</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/7.jsp">Anuvakam 7</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 8</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/8.jsp">Anuvakam 8</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 9</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/9.jsp">Anuvakam 9</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 10</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/10.jsp">Anuvakam 10</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 11</a>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/11.jsp">Anuvakam 11</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/vedam/namakam/complete.jsp">Complete Namakam</a>
                                 </li>
                             </ul>
                         </li>

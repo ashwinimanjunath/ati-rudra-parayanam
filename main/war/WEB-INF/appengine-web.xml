@@ -33,6 +33,7 @@
 		<include path="/**.js" />
 		<include path="/**.pdf" />
 		<include path="/**.ico" />
+		<include path="/**.mp3" />
 	</static-files>
 	<resource-files>
 		<include path="/**.properties" />
