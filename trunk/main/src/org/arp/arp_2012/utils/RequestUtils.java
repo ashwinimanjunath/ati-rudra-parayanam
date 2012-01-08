@@ -6,6 +6,8 @@ import java.io.StringWriter;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,8 +108,10 @@ public class RequestUtils {
 			final int yearOfBirth) {
 		final S3Client client = new S3Client();
 		try {
-			final S3Object xmlObject = client.findFile(generateXMLFileName(
-					email, yearOfBirth));
+			final String fileName = generateXMLFileName(email, yearOfBirth);
+			Logger.getLogger(Registration.class.getSimpleName()).log(
+					Level.WARNING, String.format("Key is %s", fileName));
+			final S3Object xmlObject = client.findFile(fileName);
 			final InputStream is = xmlObject.getObjectContent();
 			try {
 				return fromXML(Registration.class, is);
@@ -116,7 +120,6 @@ public class RequestUtils {
 			}
 
 		} catch (final AmazonClientException e) {
-			// Probably a object not found exception
 			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
