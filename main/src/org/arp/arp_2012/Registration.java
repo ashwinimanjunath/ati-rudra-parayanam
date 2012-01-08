@@ -24,11 +24,11 @@ public final class Registration {
 
 	private ImmigrationStatus immigrationStatus = ImmigrationStatus.US_GC;
 
-	private String cityOfDeparture = "Tribhuvan International Airport (KTM, Kathmandu, Nepal)";
+	private String cityOfDeparture;
 
 	private String dateOfDeparture = "06/21/2012";
 
-	private String cityOfArrival;
+	private String cityOfArrival = "Tribhuvan International Airport (KTM, Kathmandu, Nepal)";
 
 	private String emailAddress;
 
