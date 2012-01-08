@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-	<application>sai-atirudram</application>
+	<application>sai-arp</application>
 	<version>1</version>
 
 	<!-- By default, App Engine sends requests serially to a given web server. 
@@ -8,11 +8,17 @@
 
 	<!-- Configure java.util.logging -->
 	<system-properties>
+		<property name="os.name" value="google-app-engine" />
+		<property name="os.version" value="1.0" />
+		<property name="java.vm.name" value="google-jvm" />
+		<property name="java.vm.version" value="1.0" />
+		<property name="user.language" value="Sanskrit" />
+		<property name="user.region" value="Puttaparthi" />
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
 	</system-properties>
 
 	<!-- HTTP Sessions are disabled by default. To enable HTTP sessions specify: -->
-	<sessions-enabled>true</sessions-enabled>
+	<sessions-enabled>false</sessions-enabled>
 	<!-- It's possible to reduce request latency by configuring your application 
 		to asynchronously write HTTP session data to the datastore: <async-session-persistence 
 		enabled="true" /> With this feature enabled, there is a very small chance 
@@ -26,9 +32,9 @@
 		<include path="/**.html" />
 		<include path="/**.js" />
 		<include path="/**.pdf" />
+		<include path="/**.ico" />
 	</static-files>
 	<resource-files>
 		<include path="/**.properties" />
 	</resource-files>
-
 </appengine-web-app>
