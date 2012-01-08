@@ -35,8 +35,9 @@
                     </a>
                 </div>
                 <div id="welcome">
-                    Namaste!
-                    <span style="font-style: italic;">(Namo + Aste = "I bow to you" )</span>
+                    <h3 style="color: #FFF">
+                        Om Namo Bhagavate Rudraya!
+                    </h3>
                 </div>
                 <div class="menu">
                     <ul id="topnav">
@@ -44,7 +45,7 @@
                             <a href="<%=cp%>">Home</a>
                         </li>
                         <li>
-                            <a href="category.html" title="Ati Rudra Parayanam at Kailash for 2012">2012 - Kailash
+                            <a href="<%= cp %>jsp/html/index.jsp" title="Ati Rudra Parayanam at Kailash for 2012">2012 - Kailash
                                 Yatra</a>
                             <ul class="children">
                                 <li>
@@ -54,135 +55,135 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<%=cp%>/KM12-Medical-certificate-Overseas.pdf" target="_blank">Physical
+                                    <a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf" target="_blank">Physical
                                         Fitness Form</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Itinerary</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Itinerary</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">FAQ</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Satsang</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Satsang</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Videos</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Videos</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Photos</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="category.html">Namakam</a>
-                            <ul class="children">
-                                <li>
-                                    <a href="category.html">Anuvakam 1</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 2</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 3</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 4</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 5</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 6</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 7</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 8</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 9</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 10</a>
-                                </li>
-                                <li>
-                                    <a href="category.html">Anuvakam 11</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Photos</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="category.html">Chamakam</a>
+                            <a href="<%= cp %>jsp/html/wip.jsp">Namakam</a>
                             <ul class="children">
                                 <li>
-                                    <a href="category.html">Anuvakam 1</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 1</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 2</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 2</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 3</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 3</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 4</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 4</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 5</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 5</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 6</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 6</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 7</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 7</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 8</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 8</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 9</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 9</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 10</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 10</a>
                                 </li>
                                 <li>
-                                    <a href="category.html">Anuvakam 11</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 11</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="category.html">Past Parayanams</a>
+                            <a href="<%= cp %>jsp/html/wip.jsp">Chamakam</a>
                             <ul class="children">
                                 <li>
-                                    <a href="category.html">2011</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 1</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 2</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 3</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 4</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 5</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 6</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 7</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 8</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 9</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 10</a>
+                                </li>
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Anuvakam 11</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="<%= cp %>jsp/html/wip.jsp">Past Parayanams</a>
+                            <ul class="children">
+                                <li>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">2011</a>
                                     <ul class="children2">
                                         <li>
-                                            <a href="category.html">Satsang</a>
+                                            <a href="<%= cp %>jsp/html/wip.jsp">Satsang</a>
                                         </li>
                                         <li>
-                                            <a href="category.html">Videos</a>
+                                            <a href="<%= cp %>jsp/html/wip.jsp">Videos</a>
                                         </li>
                                         <li>
-                                            <a href="category.html">Photos</a>
+                                            <a href="<%= cp %>jsp/html/wip.jsp">Photos</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="category.html">2010</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">2010</a>
                                     <ul class="children2">
                                         <li>
-                                            <a href="category.html">Satsang</a>
+                                            <a href="<%= cp %>jsp/html/wip.jsp">Satsang</a>
                                         </li>
                                         <li>
-                                            <a href="category.html">Videos</a>
+                                            <a href="<%= cp %>jsp/html/wip.jsp">Videos</a>
                                         </li>
                                         <li>
-                                            <a href="category.html">Photos</a>
+                                            <a href="<%= cp %>jsp/html/wip.jsp">Photos</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="category.html">Background</a>
+                                    <a href="<%= cp %>jsp/html/wip.jsp">Background</a>
                                 </li>
                             </ul>
                         </li>
