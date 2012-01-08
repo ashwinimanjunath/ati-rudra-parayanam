@@ -27,7 +27,7 @@
 <script type="text/javascript" src="<%=cp%>js/app/vedam/embed_pdf.js"></script>
 <script type="text/javascript">
 	jQuery (function () {
-		jQuery.embed_vedam_pdf (window.cp + "jsp/html/vedam/namakam/complete.pdf", window.cp + "jsp/html/vedam/namakam/complete.mp3")
+		jQuery.embed_vedam_pdf ("http://sai-arp.s3-website-us-east-1.amazonaws.com/namakam/complete.pdf", "http://sai-arp.s3-website-us-east-1.amazonaws.com/namakam/complete.mp3")
 	});
 </script>
 <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
