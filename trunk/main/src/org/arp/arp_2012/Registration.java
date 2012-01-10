@@ -32,7 +32,11 @@ public final class Registration {
 
 	private String emailAddress;
 
+	private PhysicianStatus physicianStatus = null;
+
 	private String physicalFitnessForm = null;
+
+	private String spendTimeAtPN = "NO";
 
 	public String getCityOfArrival() {
 		return cityOfArrival;
@@ -72,6 +76,31 @@ public final class Registration {
 
 	public String getPhysicalFitnessForm() {
 		return physicalFitnessForm;
+	}
+
+	public final PhysicianStatus getPhysicianStatus() {
+		return physicianStatus;
+	}
+
+	public String getSpendTimeAtPN() {
+		return spendTimeAtPN;
+	}
+
+	@JsonIgnore
+	@XmlTransient
+	public int getYearOfBirth() {
+		if (!StringUtils.isBlank(dateOfBirth)) {
+			try {
+				final Date dob = new SimpleDateFormat("MM/dd/yyyy")
+						.parse(dateOfBirth);
+				final Calendar cal = Calendar.getInstance();
+				cal.setTime(dob);
+				return cal.get(Calendar.YEAR);
+			} catch (ParseException e) {
+				// Do nothing, illegal date entered
+			}
+		}
+		return 0;
 	}
 
 	public void setCityOfArrival(String portOfArrival) {
@@ -114,19 +143,11 @@ public final class Registration {
 		this.physicalFitnessForm = physicalFitnessForm;
 	}
 
-	@JsonIgnore
-	@XmlTransient
-	public int getYearOfBirth() {
-		if (!StringUtils.isBlank(dateOfBirth)) {
-			try {
-				final Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(dateOfBirth);
-				final Calendar cal = Calendar.getInstance();
-				cal.setTime(dob);
-				return cal.get(Calendar.YEAR);
-			} catch (ParseException e) {
-				//Do nothing, illegal date entered
-			}
-		}
-		return 0;
+	public final void setPhysicianStatus(PhysicianStatus physicianStatus) {
+		this.physicianStatus = physicianStatus;
+	}
+
+	public void setSpendTimeAtPN(String spendTimeAtPN) {
+		this.spendTimeAtPN = spendTimeAtPN;
 	}
 }

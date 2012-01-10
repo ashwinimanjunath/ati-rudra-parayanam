@@ -4,7 +4,7 @@
 <%@page import="java.util.Map"%>
 <%@include file="/WEB-INF/jsp/common/header.jsp"%>
 <%
-    Registration registration = RequestUtils.registration(request);
+	Registration registration = RequestUtils.registration(request);
 %>
 <div class="inner">
     <h2 class="heading-title">
@@ -17,7 +17,8 @@
                     <div class="stitched"></div>
                     <div class="left" style="width: 100%; height: auto;">
                         <form action="<%=cp%>jsp/html/save_registration.jsp" enctype="multipart/form-data"
-                            id="editRegistrationForm" method = "post">
+                            id="editRegistrationForm" method="post"
+                        >
                             <div class="formField">
                                 <span class="label">E-mail Address</span>
                                 <input type="text" value="" name="emailAddress" class="text" />
@@ -37,11 +38,11 @@
                             </div>
                             <div class="formField">
                                 <span class="label">Gender</span>
-                                <div style="background-color: #FFF;padding: 4px;width: 20em">
-                                <input type="radio" name="gender" value="MALE" />
-                                Male
-                                <input type="radio" name="gender" value="FEMALE" />
-                                Female
+                                <div style="background-color: #FFF; padding: 4px; width: 20em">
+                                    <input type="radio" name="gender" value="MALE" />
+                                    Male
+                                    <input type="radio" name="gender" value="FEMALE" />
+                                    Female
                                 </div>
                             </div>
                             <div class="formField">
@@ -97,51 +98,85 @@
                                 />
                             </div>
                             <div class="formField">
-                                <div style="float: left; width: 40%">
-                                    <span class="label">
-                                        <span>Physical Fitness Form</span>
-<%
-    if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())) {
-%>
-                                    <a href = "http://sai-arp-2012-registration.s3-website-us-west-1.amazonaws.com/<%= RequestUtils.generatePDFFileName(registration) %>" type = "button" onclick = "return false;" target = "_blank" style = "padding-left: 100px" title = "Download your previously uploaded form"><span>Download</span></a>
-<%        
-    }
-%>                                    
-                                        
-                                    </span>
-                                    <input type="file" class="text port" name="physicalFitnessForm" disabled="disabled"
-                                    />
-                                    <a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf" target="_blank"
-                                        style="display: block; margin-top: 5px"
-                                        title="Right Click, then click save link/target as"
-                                    >Download Blank Form Here</a>
+                                <div class="formField">
+                                    <div style="float: left; width: 40%">
+                                        <span class="label">Spend Time at Prashanti Nilayam ?</span>
+                                        <div style="background-color: #FFF; padding: 4px; width: 20em">
+                                            <input type="radio" name="spendTimeAtPN" value="YES" />
+                                            Yes
+                                            <input type="radio" name="spendTimeAtPN" value="No" />
+                                            No
+                                        </div>
+                                    </div>
+                                    <div class="notes" style="float: right; width: 60%">
+                                        <div>The group plans to spend time at Prashanti Nilayam (for at least 2
+                                            days) after the pilgrimage.</div>
+                                        <div>We would be happy if you joined us. Would you like to ?</div>
+                                    </div>
+                                    <div class="clear"></div>
                                 </div>
-                                <div class="notes" style="float: right; width: 60%">
-                                    <div class="first_line">This requirement is mandatory.</div>
-                                    <div>We strongly believe that Swami's grace will help us accomplish this
-                                        pilgrimage irrespective of our age, physical, mental and spiritual fitness. Thus
-                                        please treat this as important but routine.</div>
-                                </div>
-                                <div class="clear"></div>
                             </div>
-                            <div style='margin: 20px'>&nbsp;</div>
-                            <a class="button" id="editRegistration" style="display: none">
-                                <span>Save</span>
-                            </a>
-                        </form>
+                            <div class="formField">
+                                <div class="formField">
+                                    <span class="label">Are you a medical professional ?</span>
+                                    <select class="select" name="physicianStatus">
+                                        <option value="NURSE">Certified Nurse</option>
+                                        <option value="PHYSICIAN">Physician</option>
+                                        <option value="OTHER">Other</option>
+                                        <option value="NONE" selected="selected">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                    <div class="formField">
+                        <div style="float: left; width: 40%">
+                            <span class="label">
+                                <span>Medical Certification</span>
+                                <%
+                                	if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())) {
+                                %>
+                                <a
+                                    href="http://sai-arp-2012-registration.s3-website-us-west-1.amazonaws.com/<%=RequestUtils.generatePDFFileName(registration)%>"
+                                    type="button" onclick="return false;" target="_blank" style="padding-left: 100px"
+                                    title="Download your previously uploaded form"
+                                >
+                                    <span>Download</span>
+                                </a>
+                                <%
+                                	}
+                                %>
+                            </span>
+                            <input type="file" class="text port" name="physicalFitnessForm" disabled="disabled" />
+                            <a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf" target="_blank"
+                                style="display: block; margin-top: 5px"
+                                title="Right Click, then click save link/target as"
+                            >Download Blank Form Here</a>
+                        </div>
+                        <div class="notes" style="float: right; width: 60%">
+                            <div class="first_line">This requirement is mandatory.</div>
+                            <div>We strongly believe that Swami's grace will help us accomplish this pilgrimage
+                                irrespective of our age, physical, mental and spiritual fitness. Thus please treat this
+                                as important but routine.</div>
+                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="stitched"></div>
+                    <div style='margin: 20px'>&nbsp;</div>
+                    <a class="button" id="editRegistration" style="display: none">
+                        <span>Save</span>
+                    </a>
+                    </form>
                 </div>
+                <div class="stitched"></div>
             </div>
         </div>
     </div>
-    <div class="clear"></div>
+</div>
+<div class="clear"></div>
 </div>
 <script type="text/javascript">
-	window.validationErrors = <%= RequestUtils.json(RequestUtils.errors(request))%>;
-	window.registration = <%= RequestUtils.json(registration)%>;
-</script>
+	window.validationErrors = <%=RequestUtils.json(RequestUtils.errors(request))%>;
 
+	window.registration = <%=RequestUtils.json(registration)%>;
+</script>
 <script type="text/javascript" src="<%=cp%>js/app/edit_registration.js"></script>
 <style>
 .ui-autocomplete {
