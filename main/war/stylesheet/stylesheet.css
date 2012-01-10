@@ -2835,3 +2835,15 @@ h1.oops {
 	background: url(../image/error.png) center left no-repeat;
 	padding-left: 20px;
 }
+
+
+#swami {
+	position: absolute;
+	top: -45px;
+	right: 0;
+	width: 400px;
+	height: 400px;
+	z-index: 100;
+	background: url(../image/swami.png) center left no-repeat;
+	
+}

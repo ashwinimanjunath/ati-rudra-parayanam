@@ -25,6 +25,7 @@
 </script>
 </head>
 <body>
+    <div id = "swami">&nbsp;</div>
     <!-- MAIN WRAPPER -->
     <div id="container">
         <!-- HEADER -->
@@ -35,7 +36,7 @@
                         <img src="<%=cp%>image/logo.png" width="217" height="141" alt="Spicylicious store" />
                     </a>
                 </div>
-                <div id="welcome">
+                <div id="welcome" style = "float:left;margin-left: 125px">
                     <h3 style="color: #FFF">
                         Om Namo Bhagavate Rudraya!
                     </h3>
