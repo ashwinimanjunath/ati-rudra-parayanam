@@ -6,7 +6,7 @@
 		var editRegistration = window.editRegistration;
 		for ( var property in editRegistration) {
 			var $e = $form.find("[name=" + property + "]");
-			if ($e.is (":radio")) {
+			if ($e.is(":radio")) {
 				$form.find("[name=" + property + "][value=" + editRegistration[property] + "]").attr("checked", true);
 			} else {
 				$e.val(editRegistration[property]);
@@ -15,15 +15,22 @@
 
 		// Now update error messages if any
 		var errors = window.validationErrors;
-		for (var property in errors) {
+		for ( var property in errors) {
 			var $e = $form.find("[name=" + property + "]");
-			var $errorDiv = $e.is (":radio") ? $e.parent ("div") : $e;
+			var $errorDiv = $e.is(":radio") ? $e.parent("div") : $e;
 			$errorDiv.addClass("error").after("<div class = 'error_message'>" + errors[property] + "</div>");
 		}
 
 		$("#editRegistration").click(function() {
-			$form.submit ();
+			$form.submit();
 			return false;
+		});
+
+		$(":text").keypress(function(e) {
+			if (e.which === 13) {
+				$form.submit();
+				return false;
+			}
 		});
 	});
 })(jQuery);

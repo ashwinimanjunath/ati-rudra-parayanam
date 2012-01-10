@@ -1,3 +1,4 @@
+<%@page import="org.arp.arp_2012.PhysicianStatus"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.arp.arp_2012.utils.S3Client"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
@@ -55,6 +56,10 @@
 			"dateOfDeparture", params.get("dateOfDeparture")));
 	registration.setCityOfArrival(RequestUtils.string(request,
 			"cityOfArrival", params.get("cityOfArrival")));
+    registration.setPhysicianStatus(RequestUtils.enuM(request,
+            "physicianStatus", params.get("physicianStatus"), PhysicianStatus.class));
+    registration.setSpendTimeAtPN(RequestUtils.string(request,
+            "spendTimeAtPN", params.get("spendTimeAtPN")));
 
 	if (!RequestUtils.hasPhysicalFitnessForm(registration)) {
 		//Check for the physical fitness form only if he has not uploaded it previously
