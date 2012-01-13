@@ -11,16 +11,18 @@
                     <div class="stitched"></div>
                     <div class="left" style="height: auto">
                         <h6>Please Note</h6>
+                        <div>This pilgrimage is a gift of pure love and divine grace of <strong>Bhagavan Sri Sathya Sai
+                            Baba</strong>. Let us all offer the parayanam with utmost humility and reverence at his lotus feet.</div>
                         <ol>
                             <li>
-                                This pilgrimage is being undertaken as a
+                                The pilgrimage and parayanam are being undertaken as a
                                 <strong>collective prayer</strong>
                                 and offering for the peace and happiness of every being in every world.
                             </li>
                             <li>
                                 It is very important that every devotee
                                 <strong>
-                                    learn to chant the
+                                    know to chant the
                                     <a href="<%=cp%>/jsp/html/namakam.jsp">Namakam</a>
                                     and
                                     <a href="<%=cp%>/jsp/html/namakam.jsp">Chamakam</a>
@@ -30,16 +32,18 @@
                                 the pilgrimage.
                             </li>
                             <li>
-                                We strongly believe that this pilgrimage is a gift of pure grace and thus would want to
-                                offer our love with utmost purity to the lord. To purify ourselves we will be
-                                undertaking a
-                                <strong>sustained and disciplined sadhana for 6 Months</strong> (January-June)
-                                before the pilgrimage. We request your fullest enthusiastic participation.
+                                <strong>Collective sadhana</strong>
+                                before the yatra is crucial.
+                                <br>
+                                By continuing to register you are committing to a sustained and disciplined collective
+                                sadhana
+                                <strong>for 5 Months (February-June)</strong>
+                                before the pilgrimage.
                             </li>
                         </ol>
                         <div style='margin: 20px'>&nbsp;</div>
                         <a class="button" id="button-contact" href="<%=cp%>jsp/html/new_registration.jsp">
-                            <span>I Agree. Continue to Registration!</span>
+                            <span>I Commit! Continue to Registration</span>
                         </a>
                     </div>
                     <div class="stitched"></div>
