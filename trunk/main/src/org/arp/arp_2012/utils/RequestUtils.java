@@ -104,12 +104,10 @@ public class RequestUtils {
 	}
 
 	public static final FlightLeg flightLeg(final HttpServletRequest request,
-			final Map<String, String> params, final String index) {
-		final String cityOfArrivalParamName = "cityOfArrival[" + index + "]";
-		final String cityOfDepartureParamName = "cityOfDeparture[" + index
-				+ "]";
-		final String dateOfDepartureParamName = "dateOfDeparture[" + index
-				+ "]";
+			final Map<String, String> params, final String format) {
+		final String cityOfArrivalParamName = format + "[cityOfArrival]";
+		final String cityOfDepartureParamName = format + "[cityOfDeparture]";
+		final String dateOfDepartureParamName = format + "[dateOfDeparture]";
 
 		// First check to see if even one value is entered
 		String arrival = StringUtils.trimToNull(params
@@ -127,12 +125,11 @@ public class RequestUtils {
 					null, false, "cityOfDeparture");
 			dateOfDeparture = param(request, dateOfDepartureParamName,
 					departure, DATE, false, "dateOfDeparture");
-			if (errors(request).isEmpty()) {
-				final FlightLeg flightLeg = new FlightLeg();
-				flightLeg.setCityOfArrival(arrival);
-				flightLeg.setCityOfDeparture(departure);
-				flightLeg.setDateOfDeparture(dateOfDeparture);
-			}
+			final FlightLeg flightLeg = new FlightLeg();
+			flightLeg.setCityOfArrival(arrival);
+			flightLeg.setCityOfDeparture(departure);
+			flightLeg.setDateOfDeparture(dateOfDeparture);
+			return flightLeg;
 		}
 
 		return null;
