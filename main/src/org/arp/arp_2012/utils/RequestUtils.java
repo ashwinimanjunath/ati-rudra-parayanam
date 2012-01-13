@@ -30,7 +30,7 @@ public class RequestUtils {
 	private static Properties messages = new Properties();
 
 	public static Pattern DATE = Pattern.compile("\\d{2}\\/\\d{2}\\/\\d{4}");
-	public static Pattern PHONE = Pattern.compile("\\d{3}-d{3}-d{4}");
+	public static Pattern PHONE = Pattern.compile("\\d{3}\\-\\d{3}\\-\\d{4}");
 	public static Pattern EMAIL = Pattern.compile(
 			"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b",
 			Pattern.CASE_INSENSITIVE);

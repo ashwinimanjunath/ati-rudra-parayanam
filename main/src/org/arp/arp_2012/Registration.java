@@ -41,13 +41,24 @@ public final class Registration {
 	private List<FlightLeg> multiCityFlightLegs = new ArrayList<FlightLeg>();
 
 	private String comments;
-	
+
 	private String phoneNumber;
 
 	private String address;
 
+	private String canChantNamakamFluently;
+	private String canChantChamakamFluently;
+
 	public final String getAddress() {
 		return address;
+	}
+
+	public final String getCanChantChamakamFluently() {
+		return canChantChamakamFluently;
+	}
+
+	public final String getCanChantNamakamFluently() {
+		return canChantNamakamFluently;
 	}
 
 	public Citizenship getCitizenship() {
@@ -57,7 +68,7 @@ public final class Registration {
 	public final String getComments() {
 		return comments;
 	}
-	
+
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -125,6 +136,15 @@ public final class Registration {
 
 	public final void setAddress(String address) {
 		this.address = address;
+	}
+
+	public final void setCanChantChamakamFluently(
+			String canChantChamakamFluently) {
+		this.canChantChamakamFluently = canChantChamakamFluently;
+	}
+
+	public final void setCanChantNamakamFluently(String canChantNamakamFluently) {
+		this.canChantNamakamFluently = canChantNamakamFluently;
 	}
 
 	public void setCitizenship(final Citizenship citizenship) {
