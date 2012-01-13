@@ -157,7 +157,7 @@
                                     </div>
                                     <div class="formField">
                                         <span class="label">City of Arrival</span>
-                                        <input type="text" class="text" disabled="disabled" readonly="readonly"
+                                        <input type="text" class="text" readonly="readonly"
                                             name="cityOfArrival[roundTrip]"
                                             value="Tribhuvan International Airport (KTM, Kathmandu, Nepal)"
                                         />

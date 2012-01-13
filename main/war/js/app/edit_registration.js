@@ -25,7 +25,7 @@
 		for ( var property in registration) {
 			var $e = $form.find("[name=" + property + "]");
 			if ($e.is(":radio")) {
-				$form.find("[name=" + property + "][value=" + registration[property] + "]").attr("checked", true);
+				$form.find("[name='" + property + "'][value='" + registration[property] + "']").attr("checked", true);
 			} else {
 				$e.val(registration[property]);
 			}
@@ -34,7 +34,7 @@
 		// Now update error messages if any
 		var errors = window.validationErrors;
 		for ( var property in errors) {
-			var $e = $form.find("[name=" + property + "]");
+			var $e = $form.find("[name='" + property + "']");
 			var $errorDiv = $e.is(":radio") ? $e.parent("div") : $e;
 			$errorDiv.addClass("error").after("<div class = 'error_message'>" + errors[property] + "</div>");
 		}

@@ -104,7 +104,7 @@ public class RequestUtils {
 	}
 
 	public static final FlightLeg flightLeg(final HttpServletRequest request,
-			final String index) {
+			final Map<String, String> params, final String index) {
 		final String cityOfArrivalParamName = "cityOfArrival[" + index + "]";
 		final String cityOfDepartureParamName = "cityOfDeparture[" + index
 				+ "]";
@@ -112,12 +112,12 @@ public class RequestUtils {
 				+ "]";
 
 		// First check to see if even one value is entered
-		String arrival = StringUtils.trimToNull(request
-				.getParameter(cityOfArrivalParamName));
-		String departure = StringUtils.trimToNull(request
-				.getParameter(cityOfDepartureParamName));
-		String dateOfDeparture = StringUtils.trimToNull(request
-				.getParameter(dateOfDepartureParamName));
+		String arrival = StringUtils.trimToNull(params
+				.get(cityOfArrivalParamName));
+		String departure = StringUtils.trimToNull(params
+				.get(cityOfDepartureParamName));
+		String dateOfDeparture = StringUtils.trimToNull(params
+				.get(dateOfDepartureParamName));
 		if (departure != null || arrival != null || dateOfDeparture != null) {
 			// if at least one of the fields are entered then validate all the
 			// three
