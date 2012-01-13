@@ -1,12 +1,24 @@
 (function($) {
 	$(function() {
+		// Create the rows for multiple values
+		var html = [];
+		for ( var i = 1; i < 10; ++i) {
+			html.push('<tr><td width="10px" style="font-size: 1.2em;">');
+			html.push(i);
+			html.push('.</td><td><div class="formField"><input type="text" class="text port" name="depart" disabled="disabled" value=""/></div></td>');
+			html.push('<td><div class="formField"><input type="text" class="text port" name="depart" disabled="disabled" value=""/></div></td>');
+			html.push('<td><div class="formField"><input type="text" style="width: 10em" value="" name="dateOfDeparture" class="text" maxlength="10"/>');
+			html.push('</div></td></tr>');
+		}
+		$("#multiCity-content tbody").html(html.join(""));
+
 		var $form = $("#editRegistrationForm");
 
 		// first populate all the registration fields with proper values
 		var registration = window.registration;
 		for ( var property in registration) {
 			var $e = $form.find("[name=" + property + "]");
-			if ($e.is (":radio")) {
+			if ($e.is(":radio")) {
 				$form.find("[name=" + property + "][value=" + registration[property] + "]").attr("checked", true);
 			} else {
 				$e.val(registration[property]);
@@ -15,9 +27,9 @@
 
 		// Now update error messages if any
 		var errors = window.validationErrors;
-		for (var property in errors) {
+		for ( var property in errors) {
 			var $e = $form.find("[name=" + property + "]");
-			var $errorDiv = $e.is (":radio") ? $e.parent ("div") : $e;
+			var $errorDiv = $e.is(":radio") ? $e.parent("div") : $e;
 			$errorDiv.addClass("error").after("<div class = 'error_message'>" + errors[property] + "</div>");
 		}
 
@@ -62,6 +74,30 @@
 		$("#editRegistration").click(function() {
 			$form.submit();
 			return false;
+		});
+
+		$("#citizenship").change(
+				function() {
+					var $this = $(this);
+					var value = $this.val();
+					var $notes = $(".dod");
+					var notes = "";
+					if (value === "INDIAN") {
+						notes = [ '<div class="first_line">Please plan to <strong>arrive in New Delhi, India by 20th of June</strong></div>',
+								'<div>Tibetian and Chinese VISAs will be issued in New Delhi on the 21st of June.</div>', '<div>You will then be flown to Kathmandu, Nepal on the 22nd</div>' ]
+								.join("");
+					} else if (value === "US_CITIZEN" || value === "CANADIAN") {
+						notes = [ '<div class="first_line">Please plan to <strong>arrive in Kathmandu, Nepal by 22nd of June</strong></div>',
+								'<div>Please carry <strong>40 USD in cash</strong> for the Nepalese VISA.</div>',
+								'<div>Tibetian and Chinese VISAs will be issued in Kathmandu on the 23rd and 24th of June</div>' ].join("");
+					}
+
+					$notes.html(notes);
+				}).change();
+		$("#multiCity, #roundTrip").click(function() {
+			$("#multiCity-content, #roundTrip-content").hide();
+			var contentId = "#" + $(this).attr("id") + "-content";
+			$(contentId).show();
 		});
 	});
 })(jQuery);

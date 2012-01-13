@@ -22,7 +22,7 @@ public final class Registration {
 
 	private String dateOfBirth;
 
-	private ImmigrationStatus immigrationStatus = ImmigrationStatus.US_GC;
+	private Citizenship citizenship = Citizenship.INDIAN;
 
 	private String cityOfDeparture;
 
@@ -66,8 +66,8 @@ public final class Registration {
 		return gender;
 	}
 
-	public ImmigrationStatus getImmigrationStatus() {
-		return immigrationStatus;
+	public Citizenship getCitizenship() {
+		return citizenship;
 	}
 
 	public String getLastName() {
@@ -131,8 +131,8 @@ public final class Registration {
 		this.gender = gender;
 	}
 
-	public void setImmigrationStatus(final ImmigrationStatus immigrationStatus) {
-		this.immigrationStatus = immigrationStatus;
+	public void setCitizenship(final Citizenship citizenship) {
+		this.citizenship = citizenship;
 	}
 
 	public void setLastName(String lastName) {
