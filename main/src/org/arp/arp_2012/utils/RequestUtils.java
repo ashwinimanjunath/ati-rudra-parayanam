@@ -16,6 +16,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang.StringUtils;
+import org.arp.arp_2012.FlightLeg;
 import org.arp.arp_2012.Registration;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -82,6 +83,15 @@ public class RequestUtils {
 		}
 	}
 
+	public static void error(final HttpServletRequest request,
+			final String paramName, final String messageKey) {
+		final Map<String, String> validationErrors = errors(request);
+		final String errorMessage = messages.containsKey(messageKey) ? messages
+				.get(messageKey).toString() : String.format(
+				"Please enter a valid value for %s", paramName);
+		validationErrors.put(paramName, errorMessage);
+	}
+
 	@SuppressWarnings("unchecked")
 	public static Map<String, String> errors(final HttpServletRequest request) {
 		if (request.getAttribute(VALIDATION_ERRORS) == null) {
@@ -93,6 +103,41 @@ public class RequestUtils {
 		return validationErrors;
 	}
 
+	public static final FlightLeg flightLeg(final HttpServletRequest request,
+			final String index) {
+		final String cityOfArrivalParamName = "cityOfArrival[" + index + "]";
+		final String cityOfDepartureParamName = "cityOfDeparture[" + index
+				+ "]";
+		final String dateOfDepartureParamName = "dateOfDeparture[" + index
+				+ "]";
+
+		// First check to see if even one value is entered
+		String arrival = StringUtils.trimToNull(request
+				.getParameter(cityOfArrivalParamName));
+		String departure = StringUtils.trimToNull(request
+				.getParameter(cityOfDepartureParamName));
+		String dateOfDeparture = StringUtils.trimToNull(request
+				.getParameter(dateOfDepartureParamName));
+		if (departure != null || arrival != null || dateOfDeparture != null) {
+			// if at least one of the fields are entered then validate all the
+			// three
+			arrival = param(request, cityOfArrivalParamName, arrival, null,
+					false, "cityOfArrival");
+			departure = param(request, cityOfDepartureParamName, departure,
+					null, false, "cityOfDeparture");
+			dateOfDeparture = param(request, dateOfDepartureParamName,
+					departure, DATE, false, "dateOfDeparture");
+			if (errors(request).isEmpty()) {
+				final FlightLeg flightLeg = new FlightLeg();
+				flightLeg.setCityOfArrival(arrival);
+				flightLeg.setCityOfDeparture(departure);
+				flightLeg.setDateOfDeparture(dateOfDeparture);
+			}
+		}
+
+		return null;
+	}
+
 	public static final <T> T fromXML(final Class<T> klass, final InputStream is) {
 		try {
 			final JAXBContext context = JAXBContext.newInstance(klass);
@@ -102,6 +147,15 @@ public class RequestUtils {
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static String generatePDFFileName(final Registration registration) {
+		if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())
+				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
+			return generatePDFFileName(registration.getEmailAddress(),
+					registration.getYearOfBirth());
+		}
+		return "";
 	}
 
 	public static final Registration getRegistration(final String email,
@@ -225,15 +279,6 @@ public class RequestUtils {
 		return null;
 	}
 
-	public static void error(final HttpServletRequest request,
-			final String paramName, final String messageKey) {
-		final Map<String, String> validationErrors = errors(request);
-		final String errorMessage = messages.containsKey(messageKey) ? messages
-				.get(messageKey).toString() : String.format(
-				"Please enter a valid value for %s", paramName);
-		validationErrors.put(paramName, errorMessage);
-	}
-
 	public static final Registration registration(HttpServletRequest request) {
 		return (Registration) request.getAttribute(REGISTRATION_KEY);
 	}
@@ -287,15 +332,6 @@ public class RequestUtils {
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public static String generatePDFFileName(final Registration registration) {
-		if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())
-				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
-			return generatePDFFileName(registration.getEmailAddress(),
-					registration.getYearOfBirth());
-		}
-		return "";
 	}
 
 	private static String generatePDFFileName(final String email,

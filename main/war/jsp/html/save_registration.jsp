@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.arp.arp_2012.FlightLeg"%>
+<%@page import="java.util.List"%>
+<%@page import="org.arp.arp_2012.TripType"%>
+<%@page import="org.arp.arp_2012.Citizenship"%>
 <%@page import="org.arp.arp_2012.PhysicianStatus"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.arp.arp_2012.utils.S3Client"%>
@@ -7,12 +12,12 @@
 <%@page import="org.apache.commons.fileupload.util.Streams"%>
 <%@page import="org.apache.commons.fileupload.FileItemStream"%>
 <%@page import="org.apache.commons.fileupload.FileItemIterator"%>
-<%@page import="org.arp.arp_2012.CitizenshipStatus"%>
-<%@page imorg.arp.arp_2012.Registrationration"%>
-<%@page imorg.arp.arp_2012.utils.RequestUtilstUtils"%>
-<%@page imjava.util.HashMapashMap"%>
-<%@page imjava.util.Mapil.Map"%>
-<%@page imorg.apache.commons.fileupload.servlet.ServletFileUploadUpload"
+<%@page import="org.arp.arp_2012.Registration"%>
+<%@page import="org.arp.arp_2012.utils.RequestUtils"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%
 	final ServletFileUpload upload = new ServletFileUpload();
 
 	final Map<String, String> params = new HashMap<String, String>();
@@ -21,57 +26,67 @@
 	while (iterator.hasNext()) {
 		final FileItemStream item = iterator.next();
 		if (item.isFormField()) {
-	final String paramValue = Streams.asString(item
-	.openStream());
-	params.put(item.getFieldName(), paramValue);
+			final String paramValue = Streams.asString(item
+					.openStream());
+			params.put(item.getFieldName(), paramValue);
 		} else {
-	params.put(item.getFieldName(), item.getName());
-	final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	Streams.copy(item.openStream(), bos, true);
-	final byte[] fileContents = bos.toByteArray();
-	files.put(item.getFieldName(), fileContents);
+			params.put(item.getFieldName(), item.getName());
+			final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			Streams.copy(item.openStream(), bos, true);
+			final byte[] fileContents = bos.toByteArray();
+			files.put(item.getFieldName(), fileContents);
 		}
 	}
 
 	final Registration registration = RequestUtils
-	.newRegistration(request);
+			.newRegistration(request);
 
 	registration.setEmailAddress(RequestUtils.email(request,
-	"emailAddress", params.get("emailAddress")));
+			"emailAddress", params.get("emailAddress")));
 	registration.setDateOfBirth(RequestUtils.date(request,
-	"dateOfBirth", params.get("dateOfBirth")));
+			"dateOfBirth", params.get("dateOfBirth")));
 	registration.setFirstName(RequestUtils.string(request, "firstName",
-	params.get("firstName")));
+			params.get("firstName")));
 	registration.setLastName(RequestUtils.string(request, "lastName",
-	params.get("lastName")));
+			params.get("lastName")));
 	registration.setGender(RequestUtils.enuM(request, "gender",
-	params.get("gender"), Gender.class));
-	registration.setCitizenship(RequestUtils.enuM(request,
-	"citizenship", params.get("citizenship"),
-	Citizenship.class));
-	registration.setCityOfDeparture(RequestUtils.string(request,
-	"cityOfDeparture", params.get("cityOfDeparture")));
-	registration.setDateOfDeparture(RequestUtils.date(request,
-	"dateOfDeparture", params.get("dateOfDeparture")));
-	registration.setCityOfArrival(RequestUtils.string(request,
-	"cityOfArrival", params.get("cityOfArrival")));
-    registration.setPhysicianStatus(RequestUtils.enuM(request,
-            "physicianStatus", params.get("physicianStatus"), PhysicianStatus.class));
-    registration.setSpendTimeAtPN(RequestUtils.string(request,
-            "spendTimeAtPN", params.get("spendTimeAtPN")));
+			params.get("gender"), Gender.class));
+	registration
+			.setCitizenship(RequestUtils.enuM(request, "citizenship",
+					params.get("citizenship"), Citizenship.class));
+	registration.setTripType(RequestUtils.enuM(request, "tripType",
+			params.get("tripType"), TripType.class));
+	registration.setPhysicianStatus(RequestUtils.enuM(request,
+			"physicianStatus", params.get("physicianStatus"),
+			PhysicianStatus.class));
+	registration.setSpendTimeAtPN(RequestUtils.string(request,
+			"spendTimeAtPN", params.get("spendTimeAtPN")));
+
+	if (registration.getTripType() == TripType.ROUND_TRIP) {
+		registration.setRoundTrip(RequestUtils.flightLeg(request,
+				"roundTrip"));
+	} else if (registration.getTripType() == TripType.MULTI_CITY) {
+		for (int i = 1; i < 10; ++i) {
+			final List<FlightLeg> legs = new ArrayList<FlightLeg>();
+			final FlightLeg leg = RequestUtils.flightLeg(request,
+					String.valueOf(i));
+			if (leg != null) {
+				legs.add(leg);
+			}
+		}
+	}
+
+	registration.setComments(StringUtils.trimToNull(request
+			.getParameter("comments")));
 
 	if (!RequestUtils.hasPhysicalFitnessForm(registration)) {
 		//Check for the physical fitness form only if he has not uploaded it previously
 		RequestUtils.string(request, "physicalFitnessForm",
-		params.get("physicalFitnessForm"));
+				params.get("physicalFitnessForm"));
 	}
 	if (RequestUtils.errors(request).isEmpty()) {
-        final byte[] fileContents = files.get("physicalFitnessForm");
-        RequestUtils.saveRegistration(registration, fileContents);
-	}
-egistration(registration, fileContents);
-	}
-ntents);
+		final byte[] fileContents = files.get("physicalFitnessForm");
+		RequestUtils.saveRegistration(registration, fileContents);
 	}
 %>
 <jsp:forward page="/WEB-INF/jsp/edit_registration.jsp" />
