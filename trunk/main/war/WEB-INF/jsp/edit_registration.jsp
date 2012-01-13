@@ -32,9 +32,9 @@
                                 <div class="formField">
                                     <span class="label">Can you fluently chant Namakam ?</span>
                                     <div style="background-color: #FFF; padding: 4px; width: 20em">
-                                        <input type="radio" name="fluentlyChantNamakam" value="YES" />
+                                        <input type="radio" name="canChantNamakamFluently" value="YES" />
                                         Yes
-                                        <input type="radio" name="fluentlyChantNamakam" value="No" />
+                                        <input type="radio" name="canChantNamakamFluently" value="No" />
                                         No
                                     </div>
                                 </div>
@@ -43,9 +43,9 @@
                                 <div class="formField">
                                     <span class="label">Can you fluently chant Chamakam ?</span>
                                     <div style="background-color: #FFF; padding: 4px; width: 20em">
-                                        <input type="radio" name="fluentlyChantChamakam" value="YES" />
+                                        <input type="radio" name="canChantChamakamFluently" value="YES" />
                                         Yes
-                                        <input type="radio" name="fluentlyChantChamakam" value="No" />
+                                        <input type="radio" name="canChantChamakamFluently" value="No" />
                                         No
                                     </div>
                                 </div>
@@ -234,11 +234,12 @@
                             <div class="formField">
                                 <span class="label">Phone Number</span>
                                 <input type="text" value="" name="phoneNumber" class="text" />
-                                <div class="helpText">A number you are most likely to be available at in the xxx-xxx-xxxx format.</div>
+                                <div class="helpText">A number you are most likely to be available at in the
+                                    xxx-xxx-xxxx format.</div>
                             </div>
                             <div class="formField">
                                 <span class="label">Address</span>
-                                <textarea class="textarea" name ="address" style="height: 4em"></textarea>
+                                <textarea class="textarea" name="address" style="height: 4em"></textarea>
                             </div>
                         </div>
                         <div class="stitched"></div>

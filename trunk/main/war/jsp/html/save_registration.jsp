@@ -61,16 +61,22 @@
 			PhysicianStatus.class));
 	registration.setSpendTimeAtPN(RequestUtils.string(request,
 			"spendTimeAtPN", params.get("spendTimeAtPN")));
-    registration.setAddress(RequestUtils.string(request,
-            "address", params.get("address")));
-    registration.setPhoneNumber(RequestUtils.phone(request,
-            "phoneNumber", params.get("phoneNumber")));
+	registration.setAddress(RequestUtils.string(request, "address",
+			params.get("address")));
+	registration.setPhoneNumber(RequestUtils.phone(request,
+			"phoneNumber", params.get("phoneNumber")));
+	registration.setCanChantChamakamFluently(RequestUtils.string(
+			request, "canChantChamakamFluently",
+			params.get("canChantChamakamFluently")));
+	registration.setCanChantNamakamFluently(RequestUtils.string(
+			request, "canChantNamakamFluently",
+			params.get("canChantNamakamFluently")));
 
 	if (registration.getTripType() == TripType.ROUND_TRIP) {
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
 				params, "roundTrip"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
-	    final List<FlightLeg> legs = new ArrayList<FlightLeg>();
+		final List<FlightLeg> legs = new ArrayList<FlightLeg>();
 		for (int i = 0; i < 9; ++i) {
 			final FlightLeg leg = RequestUtils.flightLeg(request,
 					params, "multiCityFlightLegs[" + i + "]");
@@ -78,7 +84,7 @@
 				legs.add(leg);
 			}
 		}
-        registration.setMultiCityFlightLegs(legs);
+		registration.setMultiCityFlightLegs(legs);
 	}
 
 	registration.setComments(StringUtils.trimToNull(request
