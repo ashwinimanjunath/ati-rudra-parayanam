@@ -5,31 +5,62 @@
 		for ( var i = 1; i < 10; ++i) {
 			html.push('<tr><td width="10px" style="font-size: 1.2em;">');
 			html.push(i);
-			html.push('.</td><td><div class="formField"><input type="text" class="text port" name="cityOfArrival[');
+			html.push('.</td><td><div class="formField"><input type="text" class="text port" name="multiCityFlightLegs[');
 			html.push(i);
-			html.push(']" disabled="disabled" value=""/></div></td>');
-			html.push('<td><div class="formField"><input type="text" class="text port" name="cityOfDeparture[');
+			html.push('][cityOfDeparture]" disabled="disabled" value=""/></div></td>');
+			html.push('<td><div class="formField"><input type="text" class="text port" name="multiCityFlightLegs[');
 			html.push(i);
-			html.push(']" disabled="disabled" value=""/></div></td>');
-			html.push('<td><div class="formField"><input type="text" style="width: 10em" class = "text datePicker" value="" name="dateOfDeparture[');
+			html.push('][cityOfArrival]" disabled="disabled" value=""/></div></td>');
+			html.push('<td><div class="formField"><input type="text" style="width: 10em" class = "text datePicker" value="" name="multiCityFlightLegs[');
 			html.push(i);
-			html.push(']" class="text" maxlength="10"/>');
+			html.push('][dateOfDeparture]" class="text" maxlength="10"/>');
 			html.push('</div></td></tr>');
 		}
 		$("#multiCity-content tbody").html(html.join(""));
 
 		var $form = $("#editRegistrationForm");
 
+		var setSimpleValue = function(property, value) {
+			var $e = $form.find("[name='" + property + "']");
+			if ($e.is(":radio")) {
+				$form.find("[name='" + property + "'][value='" + value + "']").attr("checked", true);
+			} else {
+				$e.val(value);
+			}
+		};
+
 		// first populate all the registration fields with proper values
 		var registration = window.registration;
-		for ( var property in registration) {
-			var $e = $form.find("[name=" + property + "]");
-			if ($e.is(":radio")) {
-				$form.find("[name='" + property + "'][value='" + registration[property] + "']").attr("checked", true);
-			} else {
-				$e.val(registration[property]);
+
+		var setValuesUsing = function(obj, propertyPrefix) {
+			debugger;
+			for (var property in obj) {
+				var value = obj[property];
+				if ($.isArray(value)) {
+					$.each(value, function(index, arrayValue) {
+						if (propertyPrefix) {
+							setValuesUsing(arrayValue, propertyPrefix + "[" + property + "]" + "[" + index + "]");
+						} else {
+							setValuesUsing(arrayValue, property + "[" + index + "]");
+						}
+					});
+				} else if ($.isPlainObject(value)) {
+					if (propertyPrefix) {
+						setValuesUsing(value, propertyPrefix + "[" + property + "]");
+					} else {
+						setValuesUsing(value, property);
+					}
+				} else {
+					if (propertyPrefix) {
+						setSimpleValue(propertyPrefix + "[" + property + "]", value);
+					} else {
+						setSimpleValue(property, value);
+					}
+				}
 			}
-		}
+		};
+		
+		setValuesUsing (registration);
 
 		// Now update error messages if any
 		var errors = window.validationErrors;

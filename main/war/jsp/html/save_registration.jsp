@@ -66,14 +66,15 @@
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
 				params, "roundTrip"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
+	    final List<FlightLeg> legs = new ArrayList<FlightLeg>();
 		for (int i = 1; i < 10; ++i) {
-			final List<FlightLeg> legs = new ArrayList<FlightLeg>();
 			final FlightLeg leg = RequestUtils.flightLeg(request,
-					params, String.valueOf(i));
+					params, "multiCityFlightLegs[" + i + "]");
 			if (leg != null) {
 				legs.add(leg);
 			}
 		}
+        registration.setMultiCityFlightLegs(legs);
 	}
 
 	registration.setComments(StringUtils.trimToNull(request
