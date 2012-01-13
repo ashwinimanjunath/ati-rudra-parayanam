@@ -64,12 +64,12 @@
 
 	if (registration.getTripType() == TripType.ROUND_TRIP) {
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
-				"roundTrip"));
+				params, "roundTrip"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
 		for (int i = 1; i < 10; ++i) {
 			final List<FlightLeg> legs = new ArrayList<FlightLeg>();
 			final FlightLeg leg = RequestUtils.flightLeg(request,
-					String.valueOf(i));
+					params, String.valueOf(i));
 			if (leg != null) {
 				legs.add(leg);
 			}
