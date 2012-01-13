@@ -5,9 +5,15 @@
 		for ( var i = 1; i < 10; ++i) {
 			html.push('<tr><td width="10px" style="font-size: 1.2em;">');
 			html.push(i);
-			html.push('.</td><td><div class="formField"><input type="text" class="text port" name="depart" disabled="disabled" value=""/></div></td>');
-			html.push('<td><div class="formField"><input type="text" class="text port" name="depart" disabled="disabled" value=""/></div></td>');
-			html.push('<td><div class="formField"><input type="text" style="width: 10em" value="" name="dateOfDeparture" class="text" maxlength="10"/>');
+			html.push('.</td><td><div class="formField"><input type="text" class="text port" name="cityOfArrival[');
+			html.push(i);
+			html.push(']" disabled="disabled" value=""/></div></td>');
+			html.push('<td><div class="formField"><input type="text" class="text port" name="cityOfDeparture[');
+			html.push(i);
+			html.push(']" disabled="disabled" value=""/></div></td>');
+			html.push('<td><div class="formField"><input type="text" style="width: 10em" class = "text datePicker" value="" name="dateOfDeparture[');
+			html.push(i);
+			html.push(']" class="text" maxlength="10"/>');
 			html.push('</div></td></tr>');
 		}
 		$("#multiCity-content tbody").html(html.join(""));
@@ -58,7 +64,7 @@
 				}
 			}).removeAttr("disabled");
 
-			$("[name=dateOfDeparture]").datepicker({
+			$(".datePicker").datepicker({
 				dateFormat : "mm/dd/yy",
 				defaultDate : "06/17/2012",
 				maxDate : "06/22/2012",

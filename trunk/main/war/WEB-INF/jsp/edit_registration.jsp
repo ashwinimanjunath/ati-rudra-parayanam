@@ -151,14 +151,23 @@
                                 <div id="roundTrip-content">
                                     <div class="formField">
                                         <span class="label">City of Departure</span>
-                                        <input type="text" class="text port" name="cityOfDeparture" disabled="disabled"
-                                            value="Loading ..."
+                                        <input type="text" class="text port" name="cityOfDeparture[roundTrip]"
+                                            disabled="disabled" value=""
+                                        />
+                                    </div>
+                                    <div class="formField">
+                                        <span class="label">City of Arrival</span>
+                                        <input type="text" class="text" disabled="disabled" readonly="readonly"
+                                            name="cityOfArrival[roundTrip]"
+                                            value="Tribhuvan International Airport (KTM, Kathmandu, Nepal)"
                                         />
                                     </div>
                                     <div class="formField">
                                         <div style="float: left; width: 40%">
                                             <span class="label">Date of Departure</span>
-                                            <input type="text" value="" name="dateOfDeparture" class="text" maxlength=4 />
+                                            <input type="text" value="" name="dateOfDeparture[roundTrip]" class="text datePicker"
+                                                maxlength=4
+                                            />
                                             <div class="helpText">MM/DD/YYYY</div>
                                         </div>
                                         <div class="notes" style="float: right; width: 60%">
@@ -170,12 +179,6 @@
                                             >
                                         </div>
                                         <div class="clear"></div>
-                                    </div>
-                                    <div class="formField">
-                                        <span class="label">City of Arrival</span>
-                                        <input type="text" class="text" disabled="disabled" readonly="readonly"
-                                            value="Tribhuvan International Airport (KTM, Kathmandu, Nepal)"
-                                        />
                                     </div>
                                 </div>
                                 <div id="multiCity-content" style="display: none">

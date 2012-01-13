@@ -2,8 +2,10 @@ package org.arp.arp_2012;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -24,12 +26,6 @@ public final class Registration {
 
 	private Citizenship citizenship = Citizenship.INDIAN;
 
-	private String cityOfDeparture;
-
-	private String dateOfDeparture = "06/21/2012";
-
-	private String cityOfArrival = "Tribhuvan International Airport (KTM, Kathmandu, Nepal)";
-
 	private String emailAddress;
 
 	private PhysicianStatus physicianStatus = null;
@@ -38,20 +34,24 @@ public final class Registration {
 
 	private String spendTimeAtPN = "NO";
 
-	public String getCityOfArrival() {
-		return cityOfArrival;
+	private TripType tripType;
+
+	private FlightLeg roundTrip = new FlightLeg();
+
+	private List<FlightLeg> multiCityFlightLegs = new ArrayList<FlightLeg>();
+
+	private String comments;
+
+	public Citizenship getCitizenship() {
+		return citizenship;
 	}
 
-	public String getCityOfDeparture() {
-		return cityOfDeparture;
+	public final String getComments() {
+		return comments;
 	}
 
 	public String getDateOfBirth() {
 		return dateOfBirth;
-	}
-
-	public String getDateOfDeparture() {
-		return dateOfDeparture;
 	}
 
 	public String getEmailAddress() {
@@ -66,12 +66,12 @@ public final class Registration {
 		return gender;
 	}
 
-	public Citizenship getCitizenship() {
-		return citizenship;
-	}
-
 	public String getLastName() {
 		return lastName;
+	}
+
+	public final List<FlightLeg> getMultiCityFlightLegs() {
+		return multiCityFlightLegs;
 	}
 
 	public String getPhysicalFitnessForm() {
@@ -82,8 +82,16 @@ public final class Registration {
 		return physicianStatus;
 	}
 
+	public final FlightLeg getRoundTrip() {
+		return roundTrip;
+	}
+
 	public String getSpendTimeAtPN() {
 		return spendTimeAtPN;
+	}
+
+	public final TripType getTripType() {
+		return tripType;
 	}
 
 	@JsonIgnore
@@ -103,20 +111,16 @@ public final class Registration {
 		return 0;
 	}
 
-	public void setCityOfArrival(String portOfArrival) {
-		this.cityOfArrival = portOfArrival;
+	public void setCitizenship(final Citizenship citizenship) {
+		this.citizenship = citizenship;
 	}
 
-	public void setCityOfDeparture(String portOfDeparture) {
-		this.cityOfDeparture = portOfDeparture;
+	public final void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
-	}
-
-	public void setDateOfDeparture(String dateOfDeparture) {
-		this.dateOfDeparture = dateOfDeparture;
 	}
 
 	public void setEmailAddress(String emailAddress) {
@@ -131,12 +135,12 @@ public final class Registration {
 		this.gender = gender;
 	}
 
-	public void setCitizenship(final Citizenship citizenship) {
-		this.citizenship = citizenship;
-	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public final void setMultiCityFlightLegs(List<FlightLeg> multiCityFlightLegs) {
+		this.multiCityFlightLegs = multiCityFlightLegs;
 	}
 
 	public void setPhysicalFitnessForm(String physicalFitnessForm) {
@@ -147,7 +151,15 @@ public final class Registration {
 		this.physicianStatus = physicianStatus;
 	}
 
+	public final void setRoundTrip(FlightLeg roundTrip) {
+		this.roundTrip = roundTrip;
+	}
+
 	public void setSpendTimeAtPN(String spendTimeAtPN) {
 		this.spendTimeAtPN = spendTimeAtPN;
+	}
+
+	public final void setTripType(TripType tripType) {
+		this.tripType = tripType;
 	}
 }
