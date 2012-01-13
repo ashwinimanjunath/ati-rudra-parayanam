@@ -41,6 +41,14 @@ public final class Registration {
 	private List<FlightLeg> multiCityFlightLegs = new ArrayList<FlightLeg>();
 
 	private String comments;
+	
+	private String phoneNumber;
+
+	private String address;
+
+	public final String getAddress() {
+		return address;
+	}
 
 	public Citizenship getCitizenship() {
 		return citizenship;
@@ -49,7 +57,7 @@ public final class Registration {
 	public final String getComments() {
 		return comments;
 	}
-
+	
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -72,6 +80,10 @@ public final class Registration {
 
 	public final List<FlightLeg> getMultiCityFlightLegs() {
 		return multiCityFlightLegs;
+	}
+
+	public final String getPhoneNumber() {
+		return phoneNumber;
 	}
 
 	public String getPhysicalFitnessForm() {
@@ -111,6 +123,10 @@ public final class Registration {
 		return 0;
 	}
 
+	public final void setAddress(String address) {
+		this.address = address;
+	}
+
 	public void setCitizenship(final Citizenship citizenship) {
 		this.citizenship = citizenship;
 	}
@@ -141,6 +157,10 @@ public final class Registration {
 
 	public final void setMultiCityFlightLegs(List<FlightLeg> multiCityFlightLegs) {
 		this.multiCityFlightLegs = multiCityFlightLegs;
+	}
+
+	public final void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public void setPhysicalFitnessForm(String physicalFitnessForm) {
