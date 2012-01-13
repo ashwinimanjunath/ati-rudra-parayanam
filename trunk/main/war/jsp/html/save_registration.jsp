@@ -61,13 +61,17 @@
 			PhysicianStatus.class));
 	registration.setSpendTimeAtPN(RequestUtils.string(request,
 			"spendTimeAtPN", params.get("spendTimeAtPN")));
+    registration.setAddress(RequestUtils.string(request,
+            "address", params.get("address")));
+    registration.setPhoneNumber(RequestUtils.phone(request,
+            "phoneNumber", params.get("phoneNumber")));
 
 	if (registration.getTripType() == TripType.ROUND_TRIP) {
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
 				params, "roundTrip"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
 	    final List<FlightLeg> legs = new ArrayList<FlightLeg>();
-		for (int i = 1; i < 10; ++i) {
+		for (int i = 0; i < 9; ++i) {
 			final FlightLeg leg = RequestUtils.flightLeg(request,
 					params, "multiCityFlightLegs[" + i + "]");
 			if (leg != null) {

@@ -2,9 +2,9 @@
 	$(function() {
 		// Create the rows for multiple values
 		var html = [];
-		for ( var i = 1; i < 10; ++i) {
+		for ( var i = 0; i < 9; ++i) {
 			html.push('<tr><td width="10px" style="font-size: 1.2em;">');
-			html.push(i);
+			html.push(i + 1);
 			html.push('.</td><td><div class="formField"><input type="text" class="text port" name="multiCityFlightLegs[');
 			html.push(i);
 			html.push('][cityOfDeparture]" disabled="disabled" value=""/></div></td>');
@@ -18,22 +18,28 @@
 		}
 		$("#multiCity-content tbody").html(html.join(""));
 
+		$("#multiCity, #roundTrip").change(function() {
+			$("#multiCity-content, #roundTrip-content").hide();
+			var contentId = "#" + $(this).attr("id") + "-content";
+			$(contentId).show();
+		});
+
 		var $form = $("#editRegistrationForm");
+
+		// first populate all the registration fields with proper values
+		var registration = window.registration;
 
 		var setSimpleValue = function(property, value) {
 			var $e = $form.find("[name='" + property + "']");
 			if ($e.is(":radio")) {
-				$form.find("[name='" + property + "'][value='" + value + "']").attr("checked", true);
+				$form.find("[name='" + property + "'][value='" + value + "']").attr("checked", true).change ();
 			} else {
 				$e.val(value);
 			}
 		};
 
-		// first populate all the registration fields with proper values
-		var registration = window.registration;
 
 		var setValuesUsing = function(obj, propertyPrefix) {
-			debugger;
 			for (var property in obj) {
 				var value = obj[property];
 				if ($.isArray(value)) {
@@ -102,7 +108,7 @@
 				minDate : "04/01/2012",
 				altField : "#date-of-departure-complete",
 				altFormat : "DD, d MM, yy"
-			}).datepicker("setDate", registration["dateOfDeparture"]);
+			});
 
 			$("#editRegistration").show();
 
@@ -131,10 +137,5 @@
 
 					$notes.html(notes);
 				}).change();
-		$("#multiCity, #roundTrip").click(function() {
-			$("#multiCity-content, #roundTrip-content").hide();
-			var contentId = "#" + $(this).attr("id") + "-content";
-			$(contentId).show();
-		});
 	});
 })(jQuery);

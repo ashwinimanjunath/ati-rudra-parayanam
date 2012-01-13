@@ -30,6 +30,7 @@ public class RequestUtils {
 	private static Properties messages = new Properties();
 
 	public static Pattern DATE = Pattern.compile("\\d{2}\\/\\d{2}\\/\\d{4}");
+	public static Pattern PHONE = Pattern.compile("\\d{3}-d{3}-d{4}");
 	public static Pattern EMAIL = Pattern.compile(
 			"\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b",
 			Pattern.CASE_INSENSITIVE);
@@ -104,10 +105,10 @@ public class RequestUtils {
 	}
 
 	public static final FlightLeg flightLeg(final HttpServletRequest request,
-			final Map<String, String> params, final String format) {
-		final String cityOfArrivalParamName = format + "[cityOfArrival]";
-		final String cityOfDepartureParamName = format + "[cityOfDeparture]";
-		final String dateOfDepartureParamName = format + "[dateOfDeparture]";
+			final Map<String, String> params, final String prefix) {
+		final String cityOfArrivalParamName = prefix + "[cityOfArrival]";
+		final String cityOfDepartureParamName = prefix + "[cityOfDeparture]";
+		final String dateOfDepartureParamName = prefix + "[dateOfDeparture]";
 
 		// First check to see if even one value is entered
 		String arrival = StringUtils.trimToNull(params
@@ -124,7 +125,7 @@ public class RequestUtils {
 			departure = param(request, cityOfDepartureParamName, departure,
 					null, false, "cityOfDeparture");
 			dateOfDeparture = param(request, dateOfDepartureParamName,
-					departure, DATE, false, "dateOfDeparture");
+					dateOfDeparture, DATE, false, "dateOfDeparture");
 			final FlightLeg flightLeg = new FlightLeg();
 			flightLeg.setCityOfArrival(arrival);
 			flightLeg.setCityOfDeparture(departure);
@@ -274,6 +275,16 @@ public class RequestUtils {
 
 		error(request, paramName, messageKey);
 		return null;
+	}
+
+	public static final String phone(final HttpServletRequest request,
+			final String paramName) {
+		return param(request, paramName, PHONE, false);
+	}
+
+	public static final String phone(final HttpServletRequest request,
+			final String paramName, final String paramValue) {
+		return param(request, paramName, paramValue, PHONE, false, paramName);
 	}
 
 	public static final Registration registration(HttpServletRequest request) {

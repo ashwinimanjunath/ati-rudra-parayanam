@@ -165,8 +165,8 @@
                                     <div class="formField">
                                         <div style="float: left; width: 40%">
                                             <span class="label">Date of Departure</span>
-                                            <input type="text" value="" name="roundTrip[dateOfDeparture]" class="text datePicker"
-                                                maxlength=4
+                                            <input type="text" value="" name="roundTrip[dateOfDeparture]"
+                                                class="text datePicker" maxlength=4
                                             />
                                             <div class="helpText">MM/DD/YYYY</div>
                                         </div>
@@ -224,7 +224,29 @@
                 </div>
             </div>
             <h2 class="heading-title">
-                <span>3. Special Needs / Questions / Comments </span>
+                <span>3. Contact Information </span>
+            </h2>
+            <div class="content account-page">
+                <div class="box-login">
+                    <div class="box-content fixed">
+                        <div class="stitched"></div>
+                        <div class="left" style="width: 100%; height: auto;">
+                            <div class="formField">
+                                <span class="label">Phone Number</span>
+                                <input type="text" value="" name="phoneNumber" class="text" />
+                                <div class="helpText">A number you are most likely to be available at in the xxx-xxx-xxxx format.</div>
+                            </div>
+                            <div class="formField">
+                                <span class="label">Address</span>
+                                <textarea class="textarea" name ="address" style="height: 4em"></textarea>
+                            </div>
+                        </div>
+                        <div class="stitched"></div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="heading-title">
+                <span>4. Special Needs / Questions / Comments </span>
             </h2>
             <div class="content account-page">
                 <div class="box-login">
