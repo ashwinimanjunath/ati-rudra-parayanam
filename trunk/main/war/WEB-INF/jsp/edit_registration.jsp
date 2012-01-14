@@ -150,13 +150,13 @@
                                 </legend>
                                 <div id="roundTrip-content">
                                     <div class="formField">
-                                        <span class="label">City of Departure</span>
+                                        <span class="label">Departure Airport</span>
                                         <input type="text" class="text port" name="roundTrip[cityOfDeparture]"
                                             disabled="disabled" value=""
                                         />
                                     </div>
                                     <div class="formField">
-                                        <span class="label">City of Arrival</span>
+                                        <span class="label">Arrival Airport</span>
                                         <input type="text" class="text" readonly="readonly"
                                             name="roundTrip[cityOfArrival]"
                                             value="Tribhuvan International Airport (KTM, Kathmandu, Nepal)"
@@ -191,8 +191,8 @@
                                         <thead>
                                             <tr>
                                                 <th>&nbsp;</th>
-                                                <th>City of Departure</th>
-                                                <th>City of Arrival</th>
+                                                <th>Departure Airport</th>
+                                                <th>Arrival Airport</th>
                                                 <th>Date of Departure</th>
                                             </tr>
                                         </thead>
