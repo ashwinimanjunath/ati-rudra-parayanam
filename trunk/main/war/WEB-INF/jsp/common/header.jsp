@@ -26,17 +26,13 @@
 </head>
 <body>
     <div id = "swami">&nbsp;</div>
+    <div id = "shirdi_swami">&nbsp;</div>
     <!-- MAIN WRAPPER -->
     <div id="container">
         <!-- HEADER -->
         <div id="header">
             <div class="inner">
-                <div id="logo">
-                    <a href="<%=cp%>jsp/html/index.jsp">
-                        <img src="<%=cp%>image/logo.png" width="217" height="141" alt="Spicylicious store" />
-                    </a>
-                </div>
-                <div id="welcome" style = "float:left;margin-left: 125px">
+                <div id="welcome" style = "float:left;margin-left: 325px">
                     <h3 style="color: #FFF">
                         Om Namo Bhagavate Rudraya!
                     </h3>
@@ -53,7 +49,7 @@
                                 <li>
                                     <a href="<%=cp%>jsp/html/register_new_return.jsp">
                                         Register
-                                        <span style="font-size: smaller; font-style: italic;">(Closes Jan/30/12)</span>
+                                        <span style="font-size: smaller; font-style: italic;">(Closes Feb/12/2012)</span>
                                     </a>
                                 </li>
                                 <li>

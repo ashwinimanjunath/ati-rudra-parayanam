@@ -14,9 +14,8 @@
                     <li>
                         <div class="prod_holder">
                             <a href="#">
-                                <img src="<%= cp %>image/snow-clad-himalayas-wallpapers.jpg"  />
+                                <img src="<%= cp %>image/himalayas.jpg"  />
                             </a>
-                            <h3>The Himalayas</h3>
                         </div>
                     </li>
                     <li>
@@ -30,9 +29,24 @@
                     <li>
                         <div class="prod_holder">
                             <a href="#">
+                                <img src="<%= cp %>image/snow-clad-himalayas-wallpapers.jpg"  />
+                            </a>
+                            <h3>The Himalayas</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="prod_holder">
+                            <a href="#">
                                 <img src="<%= cp %>image/kailash_lingam.jpg"  />
                             </a>
                             <h3>Kailasha Lingam</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="prod_holder">
+                            <a href="#">
+                                <img src="<%= cp %>image/shiva.png"  />
+                            </a>
                         </div>
                     </li>
                 </ul>
