@@ -87,8 +87,7 @@
 		registration.setMultiCityFlightLegs(legs);
 	}
 
-	registration.setComments(StringUtils.trimToNull(request
-			.getParameter("comments")));
+	registration.setComments(StringUtils.trimToNull(params.get("comments")));
 
 	if (!RequestUtils.hasPhysicalFitnessForm(registration)) {
 		//Check for the physical fitness form only if he has not uploaded it previously
@@ -98,6 +97,12 @@
 	if (RequestUtils.errors(request).isEmpty()) {
 		final byte[] fileContents = files.get("physicalFitnessForm");
 		RequestUtils.saveRegistration(registration, fileContents);
-	}
+%>
+<jsp:forward page="/WEB-INF/jsp/registration_saved.jsp" />
+<%		
+	} else {
 %>
 <jsp:forward page="/WEB-INF/jsp/edit_registration.jsp" />
+<%
+	}
+%>

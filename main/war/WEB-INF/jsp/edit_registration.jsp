@@ -255,7 +255,7 @@
                         <div class="stitched"></div>
                         <div style="margin: 20px 30px 10px 20px; height: auto;">
                             <div class="formField">
-                                <textarea class="textarea" class="textarea" style="width: 100%; height: 10em"></textarea>
+                                <textarea name="comments"  class="textarea" style="width: 100%; height: 10em"></textarea>
                             </div>
                         </div>
                         <div class="stitched"></div>
