@@ -57,7 +57,7 @@
                                         Fitness Form</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">Itinerary</a>
+                                    <a href="<%= cp %>jsp/html/itinerary.jsp">Itinerary</a>
                                 </li>
                                 <li>
                                     <a href="<%= cp %>jsp/html/faq.jsp">FAQ</a>
