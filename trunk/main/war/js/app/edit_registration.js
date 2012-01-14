@@ -126,13 +126,13 @@
 					var $notes = $(".dod");
 					var notes = "";
 					if (value === "INDIAN") {
-						notes = [ '<div class="first_line">Please plan to <strong>arrive in New Delhi, India by 20th of June</strong></div>',
-								'<div>Tibetian and Chinese VISAs will be issued in New Delhi on the 21st of June.</div>', '<div>You will then be flown to Kathmandu, Nepal on the 22nd</div>' ]
+						notes = [ '<div class="first_line">Please plan to <strong>arrive in New Delhi, India by Tuesday, the 19th of June</strong></div>',
+								'<div>Tibetian and Chinese VISAs will be issued in New Delhi on Wednesday the 20th of June.</div>', '<div>You will then be flown to Kathmandu, Nepal on Thursday the 21st of June</div>' ]
 								.join("");
 					} else if (value === "US_CITIZEN" || value === "CANADIAN") {
-						notes = [ '<div class="first_line">Please plan to <strong>arrive in Kathmandu, Nepal by 22nd of June</strong></div>',
+						notes = [ '<div class="first_line">Please plan to <strong>arrive in Kathmandu, Nepal by 21st of June</strong></div>',
 								'<div>Please carry <strong>40 USD in cash</strong> for the Nepalese VISA.</div>',
-								'<div>Tibetian and Chinese VISAs will be issued in Kathmandu on the 23rd and 24th of June</div>' ].join("");
+								'<div>Tibetian and Chinese VISAs will be issued in Kathmandu on the 22nd of June</div>' ].join("");
 					}
 
 					$notes.html(notes);
