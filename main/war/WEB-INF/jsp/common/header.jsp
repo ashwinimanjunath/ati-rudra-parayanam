@@ -64,7 +64,7 @@
                                     <a href="<%= cp %>jsp/html/wip.jsp">Itinerary</a>
                                 </li>
                                 <li>
-                                    <a href="<%= cp %>jsp/html/wip.jsp">FAQ</a>
+                                    <a href="<%= cp %>jsp/html/faq.jsp">FAQ</a>
                                 </li>
                                 <li>
                                     <a href="<%= cp %>jsp/html/wip.jsp">Satsang</a>
