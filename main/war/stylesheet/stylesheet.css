@@ -286,9 +286,8 @@ ul.main_menu li a:hover,ul.main_menu li a.active {
 	width: 978px;
 	height: 70px;
 	clear: both;
-	padding: 8px 0 0 10px;
-	background: url(../image/back_header_categories.png) top center
-		no-repeat;
+	padding: 8px 0 0 210px;
+	background: url(../image/back_header_categories.png) top left no-repeat;
 	position: relative;
 	z-index: 299;
 }
@@ -2836,14 +2835,22 @@ h1.oops {
 	padding-left: 20px;
 }
 
-
 #swami {
 	position: absolute;
-	top: -45px;
-	right: 0;
-	width: 400px;
-	height: 400px;
+	top: 0px;
+	right: 50px;
+	width: 300px;
+	height: 180px;
 	z-index: 100;
 	background: url(../image/swami.png) center left no-repeat;
-	
+}
+
+#shirdi_swami {
+	position: absolute;
+	top: 0px;
+	left: 50px;
+	width: 300px;
+	height: 180px;
+	z-index: 100;
+	background: url(../image/shirdi_swami.png) center left no-repeat;
 }
