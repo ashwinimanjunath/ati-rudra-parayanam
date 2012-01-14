@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ati Rudra Parayanam - 2012</title>
-<link rel="stylesheet" href="<%=cp%>stylesheet/stylesheet.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<%=cp%>stylesheet/app.css" type="text/css"/>
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
 <link rel="stylesheet" type="text/css" href="<%=cp%>stylesheet/aristo/jquery-ui-1.8.7.custom.css" />
 <!-- jQuery and Custom scripts -->
