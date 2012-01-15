@@ -34,7 +34,7 @@ public final class Registration {
 
 	private String spendTimeAtPN = "NO";
 
-	private TripType tripType;
+	private TripType tripType = TripType.OWN_ARRANGEMENTS;
 
 	private FlightLeg roundTrip = new FlightLeg();
 

@@ -18,8 +18,8 @@
 		}
 		$("#multiCity-content tbody").html(html.join(""));
 
-		$("#multiCity, #roundTrip").change(function() {
-			$("#multiCity-content, #roundTrip-content").hide();
+		$("#multiCity, #roundTrip, #ownArrangements").change(function() {
+			$("#multiCity-content, #roundTrip-content, #ownArrangements-content").hide();
 			var contentId = "#" + $(this).attr("id") + "-content";
 			$(contentId).show();
 		});

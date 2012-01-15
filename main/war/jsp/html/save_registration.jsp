@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.arp.arp_2012.FlightLeg"%>
 <%@page import="java.util.List"%>
@@ -30,11 +31,14 @@
 					.openStream());
 			params.put(item.getFieldName(), paramValue);
 		} else {
-			params.put(item.getFieldName(), item.getName());
-			final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			Streams.copy(item.openStream(), bos, true);
-			final byte[] fileContents = bos.toByteArray();
-			files.put(item.getFieldName(), fileContents);
+			final String clientFileName = item.getName();
+			if (!StringUtils.isBlank(clientFileName)) {
+				params.put(item.getFieldName(), clientFileName);
+				final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+				Streams.copy(item.openStream(), bos, true);
+				final byte[] fileContents = bos.toByteArray();
+				files.put(item.getFieldName(), fileContents);
+			}
 		}
 	}
 
@@ -59,8 +63,8 @@
 	registration.setPhysicianStatus(RequestUtils.enuM(request,
 			"physicianStatus", params.get("physicianStatus"),
 			PhysicianStatus.class));
-	registration.setSpendTimeAtPN(RequestUtils.string(request,
-			"spendTimeAtPN", params.get("spendTimeAtPN")));
+	registration.setSpendTimeAtPN(StringUtils.trimToNull(params
+			.get("spendTimeAtPN")));
 	registration.setAddress(RequestUtils.string(request, "address",
 			params.get("address")));
 	registration.setPhoneNumber(RequestUtils.phone(request,
@@ -72,7 +76,11 @@
 			request, "canChantNamakamFluently",
 			params.get("canChantNamakamFluently")));
 
-	if (registration.getTripType() == TripType.ROUND_TRIP) {
+	if (registration.getTripType() == TripType.OWN_ARRANGEMENTS) {
+		registration.setRoundTrip(null);
+		registration.setMultiCityFlightLegs(Collections
+				.<FlightLeg> emptyList());
+	} else if (registration.getTripType() == TripType.ROUND_TRIP) {
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
 				params, "roundTrip"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
@@ -87,19 +95,21 @@
 		registration.setMultiCityFlightLegs(legs);
 	}
 
-	registration.setComments(StringUtils.trimToNull(params.get("comments")));
+	registration.setComments(StringUtils.trimToNull(params
+			.get("comments")));
 
-	if (!RequestUtils.hasPhysicalFitnessForm(registration)) {
-		//Check for the physical fitness form only if he has not uploaded it previously
-		RequestUtils.string(request, "physicalFitnessForm",
-				params.get("physicalFitnessForm"));
-	}
 	if (RequestUtils.errors(request).isEmpty()) {
 		final byte[] fileContents = files.get("physicalFitnessForm");
 		RequestUtils.saveRegistration(registration, fileContents);
+		if (RequestUtils.hasPhysicalFitnessForm(registration)) {
 %>
 <jsp:forward page="/WEB-INF/jsp/registration_saved.jsp" />
-<%		
+<%
+	} else {
+%>
+<jsp:forward page="/WEB-INF/jsp/registration_incomplete.jsp" />
+<%
+	}
 	} else {
 %>
 <jsp:forward page="/WEB-INF/jsp/edit_registration.jsp" />
