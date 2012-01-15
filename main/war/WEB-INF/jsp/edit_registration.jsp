@@ -13,17 +13,21 @@
 			<h2 class="heading-title">
 				<span>1. Registration</span>
 			</h2>
-<%
- 	if (!StringUtils.isBlank(registration.getEmailAddress()) && !RequestUtils.hasPhysicalFitnessForm(registration)) {
- %>			
+			<%
+				if (!StringUtils.isBlank(registration.getEmailAddress())
+						&& !RequestUtils.hasPhysicalFitnessForm(registration)) {
+			%>
 			<div class="box-login">
 				<div class="box-content fixed">
-					<div class = "warning_icon" style="width: 100%; padding: 5px 0px 5px 25px;color:red;margin-left: 10px;">Your registration is incomplete. Please upload the medical consent form to complete it.</div>
+					<div class="warning_icon"
+						style="width: 100%; padding: 5px 0px 5px 25px; color: red; margin-left: 10px;">Your
+						registration is incomplete. Please upload the medical consent form
+						to complete it.</div>
 				</div>
 			</div>
-<%
- 	}
-%>			
+			<%
+				}
+			%>
 			<div class="content account-page">
 				<div class="box-login">
 					<div class="box-content fixed">
@@ -148,6 +152,51 @@
 							<div class="formField">
 								<span class="label">Address</span>
 								<textarea class="textarea" name="address" style="height: 4em"></textarea>
+							</div>
+							<div class="formField">
+								<fieldset style="margin-right: 40px; margin-bottom: 20px">
+									<legend>
+										<span title="Will family members be travelling with you? ">Are
+											family members joining you ?</span> <span
+											title="Yes, members of my family are joining me on this pilgrimage">
+											<input type="radio" id="yes" name="joiningWithFamily" value="YES" />Yes
+										</span> 
+										<span title="I am travelling alone"> <input
+											type="radio" id="no" name="joiningWithFamily" value="NO"
+											checked="checked" /> No
+										</span>
+									</legend>
+									<div id="yes-content" style="display: none">
+										<div class="formField">
+											<div class="notes">
+												<div class="first_line">This information will help us
+													consider the family as a unit while planning logistics.</div>
+												<div>
+													Please note that <strong>every member</strong> of the
+													family still <strong>has to register</strong> separately.
+												</div>
+											</div>
+										</div>
+										<table style="width: 100%">
+											<thead>
+												<tr>
+													<th>&nbsp;</th>
+													<th>Name</th>
+													<th>Relationship</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+
+									<div id="no-content">
+										<div class="formField">
+											<span class="label">Nobody from my family will be
+												joining me.</span>
+										</div>
+									</div>
+								</fieldset>
 							</div>
 						</div>
 						<div class="stitched"></div>
@@ -275,6 +324,7 @@
 <%=RequestUtils.json(registration)%>
 	;
 </script>
+
 <script type="text/javascript" src="<%=cp%>js/app/edit_registration.js"></script>
 <style>
 .ui-autocomplete {

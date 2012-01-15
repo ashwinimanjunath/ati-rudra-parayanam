@@ -6,8 +6,6 @@ import java.io.StringWriter;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +14,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang.StringUtils;
+import org.arp.arp_2012.FamilyMember;
 import org.arp.arp_2012.FlightLeg;
 import org.arp.arp_2012.Registration;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -131,6 +130,31 @@ public class RequestUtils {
 			flightLeg.setCityOfDeparture(departure);
 			flightLeg.setDateOfDeparture(dateOfDeparture);
 			return flightLeg;
+		}
+
+		return null;
+	}
+
+	public static final FamilyMember familyMember(
+			final HttpServletRequest request, final Map<String, String> params,
+			final String prefix) {
+		final String nameParamName = prefix + "[name]";
+		final String relationshipParamName = prefix + "[relationship]";
+
+		// First check to see if even one value is entered
+		String name = StringUtils.trimToNull(params.get(nameParamName));
+		String relationship = StringUtils.trimToNull(params
+				.get(relationshipParamName));
+		if (relationship != null || name != null) {
+			// if at least one of the fields are entered then validate all the
+			// three
+			name = param(request, nameParamName, name, null, false, "name");
+			relationship = param(request, relationshipParamName, relationship,
+					null, false, "relationship");
+			final FamilyMember member = new FamilyMember();
+			member.setName(name);
+			member.setRelationship(relationship);
+			return member;
 		}
 
 		return null;

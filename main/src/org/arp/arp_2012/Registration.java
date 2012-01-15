@@ -48,6 +48,10 @@ public final class Registration {
 
 	private String canChantNamakamFluently;
 	private String canChantChamakamFluently;
+	
+	private String joiningWithFamily = "NO";
+	
+	private List<FamilyMember> familyMembers = null;
 
 	public final String getAddress() {
 		return address;
@@ -57,6 +61,7 @@ public final class Registration {
 		return canChantChamakamFluently;
 	}
 
+
 	public final String getCanChantNamakamFluently() {
 		return canChantNamakamFluently;
 	}
@@ -64,6 +69,7 @@ public final class Registration {
 	public Citizenship getCitizenship() {
 		return citizenship;
 	}
+	
 
 	public final String getComments() {
 		return comments;
@@ -77,12 +83,20 @@ public final class Registration {
 		return emailAddress;
 	}
 
+	public final List<FamilyMember> getFamilyMembers() {
+		return familyMembers;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
 
 	public Gender getGender() {
 		return gender;
+	}
+
+	public final String getJoiningWithFamily() {
+		return joiningWithFamily;
 	}
 
 	public String getLastName() {
@@ -163,12 +177,20 @@ public final class Registration {
 		this.emailAddress = emailAddress;
 	}
 
+	public final void setFamilyMembers(List<FamilyMember> familyMembers) {
+		this.familyMembers = familyMembers;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public final void setJoiningWithFamily(String joiningWithFamily) {
+		this.joiningWithFamily = joiningWithFamily;
 	}
 
 	public void setLastName(String lastName) {

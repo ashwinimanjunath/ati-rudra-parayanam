@@ -23,6 +23,28 @@
 			var contentId = "#" + $(this).attr("id") + "-content";
 			$(contentId).show();
 		});
+		
+		
+		var family = [];
+		for ( var i = 0; i < 5; ++i) {
+			family.push('<tr><td width="10px" style="font-size: 1.2em;">');
+			family.push(i + 1);
+			family.push('.</td><td><div class="formField"><input type="text" class="text" name="familyMembers[');
+			family.push(i);
+			family.push('][name]" value=""/></div></td>');
+			family.push('<td><div class="formField"><input type="text" class="text" name="familyMembers[');
+			family.push(i);
+			family.push('][relationship]" value=""/></div></td>');
+			family.push('</tr>');
+		}
+		$("#yes-content tbody").html(family.join(""));
+		
+		$("#yes, #no").change(function() {
+			$("#yes-content, #no-content").hide();
+			var contentId = "#" + $(this).attr("id") + "-content";
+			$(contentId).show();
+		});
+		 
 
 		var $form = $("#editRegistrationForm");
 

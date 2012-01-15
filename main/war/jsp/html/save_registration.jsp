@@ -1,3 +1,4 @@
+<%@page import="org.arp.arp_2012.FamilyMember"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.arp.arp_2012.FlightLeg"%>
@@ -58,8 +59,6 @@
 	registration
 			.setCitizenship(RequestUtils.enuM(request, "citizenship",
 					params.get("citizenship"), Citizenship.class));
-	registration.setTripType(RequestUtils.enuM(request, "tripType",
-			params.get("tripType"), TripType.class));
 	registration.setPhysicianStatus(RequestUtils.enuM(request,
 			"physicianStatus", params.get("physicianStatus"),
 			PhysicianStatus.class));
@@ -75,6 +74,8 @@
 	registration.setCanChantNamakamFluently(RequestUtils.string(
 			request, "canChantNamakamFluently",
 			params.get("canChantNamakamFluently")));
+	registration.setTripType(RequestUtils.enuM(request, "tripType",
+			params.get("tripType"), TripType.class));
 
 	if (registration.getTripType() == TripType.OWN_ARRANGEMENTS) {
 		registration.setRoundTrip(null);
@@ -93,6 +94,24 @@
 			}
 		}
 		registration.setMultiCityFlightLegs(legs);
+	}
+
+	registration.setJoiningWithFamily(StringUtils.trimToNull(params
+			.get("joiningWithFamily")));
+	if ("yes".equalsIgnoreCase(registration.getJoiningWithFamily())) {
+		final List<FamilyMember> members = new ArrayList<FamilyMember>();
+		for (int i = 0; i < 5; ++i) {
+			final FamilyMember member = RequestUtils.familyMember(
+					request, params, "familyMembers[" + i + "]");
+			if (member != null) {
+				members.add(member);
+			}
+		}
+		registration.setFamilyMembers(members);
+	} else {
+		registration.setJoiningWithFamily("NO");
+		registration.setFamilyMembers(Collections
+				.<FamilyMember> emptyList());
 	}
 
 	registration.setComments(StringUtils.trimToNull(params
