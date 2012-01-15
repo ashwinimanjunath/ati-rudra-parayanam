@@ -2854,3 +2854,11 @@ h1.oops {
 	z-index: 100;
 	background: url(../image/shirdi_swami.png) center left no-repeat;
 }
+
+.warning_icon {
+	background: url(../image/error.png) center left no-repeat
+}
+
+.success_icon {
+	background: url(../image/accept.png) center left no-repeat
+}

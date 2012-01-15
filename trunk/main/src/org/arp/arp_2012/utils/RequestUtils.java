@@ -161,8 +161,6 @@ public class RequestUtils {
 		final S3Client client = new S3Client();
 		try {
 			final String fileName = generateXMLFileName(email, yearOfBirth);
-			Logger.getLogger(Registration.class.getSimpleName()).log(
-					Level.WARNING, String.format("Key is %s", fileName));
 			final S3Object xmlObject = client.findFile(fileName);
 			final InputStream is = xmlObject.getObjectContent();
 			try {
@@ -179,7 +177,7 @@ public class RequestUtils {
 	}
 
 	public static boolean hasPhysicalFitnessForm(final Registration registration) {
-		if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())
+		if (!StringUtils.isBlank(registration.getEmailAddress())
 				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
 			// Check if the physical fitness form is already with us
 			final String pdfFileName = generatePDFFileName(
@@ -300,7 +298,7 @@ public class RequestUtils {
 	public static final Registration saveRegistration(
 			final Registration registration, final byte[] physicalFitnessForm) {
 		final S3Client client = new S3Client();
-		if (physicalFitnessForm != null) {
+		if (physicalFitnessForm != null && physicalFitnessForm.length > 0) {
 			// Save the physical fitness form to Amazon S3
 			final String pdfFileName = generatePDFFileName(
 					registration.getEmailAddress(),

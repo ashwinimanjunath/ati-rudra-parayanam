@@ -48,8 +48,6 @@
 <script type="text/javascript">
     window.validationErrors = <%=RequestUtils.json(RequestUtils.errors(request))%>;
     
-	window.editRegistration = _$tag__
-estUtils.json(request.getParameterMap())%>
-	;
+	window.editRegistration = <%= RequestUtils.json(request.getParameterMap())%>;
 </script>
 <%@include file="/WEB-INF/jsp/common/footer.jsp"%>
