@@ -286,7 +286,7 @@ ul.main_menu li a:hover,ul.main_menu li a.active {
 	width: 978px;
 	height: 70px;
 	clear: both;
-	padding: 8px 0 0 210px;
+	padding: 8px 0 0 275px;
 	background: url(../image/back_header_categories.png) top left no-repeat;
 	position: relative;
 	z-index: 299;
@@ -2853,4 +2853,12 @@ h1.oops {
 	height: 180px;
 	z-index: 100;
 	background: url(../image/shirdi_swami.png) center left no-repeat;
+}
+
+.warning_icon {
+	background: url(../image/error.png) center left no-repeat
+}
+
+.success_icon {
+	background: url(../image/accept.png) center left no-repeat
 }
