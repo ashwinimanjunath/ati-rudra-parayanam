@@ -171,7 +171,7 @@
 											<div class="notes">
 												<div class="first_line">This information will help us
 													consider the family as a unit while planning logistics.</div>
-												<div>
+												<div style = "color:#D06464;font-style: italic;font-weight: bold;text-decoration: underline; font-size: 120%">
 													Please note that <strong>every member</strong> of the
 													family still <strong>has to register</strong> separately.
 												</div>
