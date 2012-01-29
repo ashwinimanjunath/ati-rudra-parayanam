@@ -1,3 +1,4 @@
+
 <%
 	final String cp = "/";
 %>
@@ -6,7 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Ati Rudra Parayanam - 2012</title>
-<link rel="stylesheet" href="<%=cp%>stylesheet/stylesheet.css" type="text/css" />
+<link rel="stylesheet" href="<%=cp%>stylesheet/stylesheet.css"
+	type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Lobster'
 	rel='stylesheet' type='text/css' />
 <link rel="stylesheet" type="text/css"
@@ -26,7 +28,8 @@
 <link href="<%=cp%>js/tipsy/css.tipsy.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
-	window.cp = "<%=cp%>";
+	window.cp = "<%=cp%>
+	";
 </script>
 </head>
 <body>
@@ -37,8 +40,16 @@
 		<!-- HEADER -->
 		<div id="header">
 			<div class="inner">
-				<div id="welcome" style="float: left; margin-left: 325px">
-					<h3 style="color: #FFF">Om Namo Bhagavate Rudraya!</h3>
+				<div id="welcome"
+					style="float: left; margin-left: 325px; margin-bottom: 0px">
+					<h3 style="color: #FFF; margin-bottom: 0px">Om Namo Bhagavate
+						Rudraya!</h3>
+				</div>
+				<div
+					style="clear: both; background: #FFF8C6; color: #333; padding: 10px 0px; opacity: 5">
+					<div>
+						<label>For any queries please call us at <a href = "tel://4084751189">(408) 475-1189</a> or email us at <a href = "mailto:saikailashyatra@gmail.com">saikailashyatra@gmail.com</a></label>
+					</div>
 				</div>
 				<div class="menu">
 					<ul id="topnav">
@@ -58,13 +69,15 @@
 								<li><a href="<%=cp%>jsp/html/wip.jsp">Satsang</a></li>
 								<li><a href="<%=cp%>jsp/html/wip.jsp">Videos</a></li>
 								<li><a href="<%=cp%>jsp/html/wip.jsp">Photos</a></li>
-								<li><a href="<%=cp%>jsp/html/wip.jsp">2011 Ati Rudra Parayanam</a>
+								<li><a href="<%=cp%>jsp/html/wip.jsp">2011 Ati Rudra
+										Parayanam</a>
 									<ul class="children2">
 										<li><a href="<%=cp%>jsp/html/wip.jsp">Satsang</a></li>
 										<li><a href="<%=cp%>jsp/html/wip.jsp">Videos</a></li>
 										<li><a href="<%=cp%>jsp/html/wip.jsp">Photos</a></li>
 									</ul></li>
-								<li><a href="<%=cp%>jsp/html/wip.jsp">2010 Ati Rudra Parayanam</a>
+								<li><a href="<%=cp%>jsp/html/wip.jsp">2010 Ati Rudra
+										Parayanam</a>
 									<ul class="children2">
 										<li><a href="<%=cp%>jsp/html/wip.jsp">Satsang</a></li>
 										<li><a href="<%=cp%>jsp/html/wip.jsp">Videos</a></li>
