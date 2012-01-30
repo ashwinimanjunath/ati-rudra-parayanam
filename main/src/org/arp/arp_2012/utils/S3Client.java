@@ -1,20 +1,20 @@
 package org.arp.arp_2012.utils;
 
 import java.io.ByteArrayInputStream;
-
-import javax.activation.MimeType;
+import java.util.List;
 
 import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
-import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.Region;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public class S3Client {
 
@@ -58,6 +58,16 @@ public class S3Client {
 
 		return false;
 	}
+	
+	public final List<S3ObjectSummary> all() {
+		try {
+			return s3.listObjects(BUCKET_NAME).getObjectSummaries();
+		} catch (Exception e) {
+		}
+
+		return null;
+	}
+
 
 	public final PutObjectResult saveFile(final String fileName,
 			final byte[] bytes) {
