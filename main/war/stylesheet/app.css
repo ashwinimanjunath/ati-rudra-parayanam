@@ -2847,7 +2847,7 @@ h1.oops {
 
 #shirdi_swami {
 	position: absolute;
-	top: 10px;
+	top: 0px;
 	left: 50px;
 	width: 300px;
 	height: 180px;
@@ -2866,8 +2866,21 @@ h1.oops {
 table.list {
 	border: 2px solid gray;
 	border-collapse: collapse;
+	width: 1200px;
+	margin-left: -100px;
 }
 
-table.list td {
+table.list td, table.list th {
 	border: 1px solid gray;
+}
+
+.large_warning_icon {
+	background: url(../image/warning-icon-hi.png) center left no-repeat;
+	padding: 25px 55px;
+	margin-left: 10px;
+}
+
+
+.error_box {
+	background: #F2AEAE;
 }

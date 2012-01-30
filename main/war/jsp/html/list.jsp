@@ -1,9 +1,6 @@
 <%@page import="org.arp.arp_2012.utils.RequestUtils"%>
 <%@include file="/WEB-INF/jsp/common/header.jsp"%>
 <div class="inner">
-	<h2 class="heading-title">
-		<span>Shiva Sena!</span>
-	</h2>
 	<div id="content">
 		<div class="content account-page">
 			<div class="box-login">
