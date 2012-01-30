@@ -2862,3 +2862,14 @@ h1.oops {
 .success_icon {
 	background: url(../image/accept.png) center left no-repeat
 }
+
+table.list {
+	border: 2px solid gray;
+	border-collapse: collapse;
+	width: 1200px;
+	margin-left: -100px;
+}
+
+table.list td, table.list th {
+	border: 1px solid gray;
+}

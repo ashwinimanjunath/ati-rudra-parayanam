@@ -1,4 +1,3 @@
-
 <%
 	final String cp = "/";
 %>
@@ -28,8 +27,7 @@
 <link href="<%=cp%>js/tipsy/css.tipsy.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
-	window.cp = "<%=cp%>
-	";
+	window.cp = "<%=cp%>";
 </script>
 </head>
 <body>

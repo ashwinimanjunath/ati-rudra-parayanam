@@ -3,6 +3,10 @@ package org.arp.arp_2012.utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
@@ -21,6 +25,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public class RequestUtils {
 
@@ -173,8 +178,18 @@ public class RequestUtils {
 
 	public static String generatePDFFileName(final Registration registration) {
 		if (!StringUtils.isBlank(registration.getPhysicalFitnessForm())
+				&& !StringUtils.isBlank(registration.getEmailAddress())
 				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
 			return generatePDFFileName(registration.getEmailAddress(),
+					registration.getYearOfBirth());
+		}
+		return "";
+	}
+
+	public static String generateXMLFileName(final Registration registration) {
+		if (!StringUtils.isBlank(registration.getEmailAddress())
+				&& !StringUtils.isBlank(registration.getDateOfBirth())) {
+			return generateXMLFileName(registration.getEmailAddress(),
 					registration.getYearOfBirth());
 		}
 		return "";
@@ -375,5 +390,50 @@ public class RequestUtils {
 	}
 
 	private RequestUtils() {
+	}
+
+	public static final List<Registration> all() {
+		try {
+			final List<Registration> registrations = new ArrayList<Registration>();
+			final S3Client client = new S3Client();
+			for (final S3ObjectSummary summary : client.all()) {
+				if (!summary.getKey().toLowerCase().endsWith(".xml")) {
+					continue;
+				}
+				final S3Object file = client.findFile(summary.getKey());
+				final InputStream is = file.getObjectContent();
+				try {
+					final Registration registration = fromXML(
+							Registration.class, is);
+					registrations.add(registration);
+				} finally {
+					is.close();
+				}
+			}
+			Collections.sort(registrations, new Comparator<Registration>() {
+				@Override
+				public int compare(Registration o1, Registration o2) {
+					final String f1 = o1.getFirstName();
+					final String f2 = o2.getFirstName();
+					if (f1 != null && f2 != null) {
+						int cmp = f1.toLowerCase().compareTo(f2.toLowerCase());
+						if (cmp == 0) {
+							final String l1 = o1.getFirstName();
+							final String l2 = o2.getFirstName();
+							if (l1 != null && l2 != null) {
+								return l1.compareTo(l2);
+							}
+						}
+						return cmp;
+					}
+					return 0;
+				}
+			});
+			return registrations;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }
