@@ -2873,3 +2873,14 @@ table.list {
 table.list td, table.list th {
 	border: 1px solid gray;
 }
+
+.large_warning_icon {
+	background: url(../image/warning-icon-hi.png) center left no-repeat;
+	padding: 25px 55px;
+	margin-left: 10px;
+}
+
+
+.error_box {
+	background: #F2AEAE;
+}
