@@ -1,3 +1,6 @@
+<%
+	request.setAttribute("no-contact-info-in-the-header", Boolean.TRUE);
+%>
 <%@page import="org.arp.arp_2012.Registration"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.arp.arp_2012.utils.RequestUtils"%>
@@ -13,6 +16,12 @@
 			<h2 class="heading-title">
 				<span>1. Registration</span>
 			</h2>
+			<div
+				style="clear: both; color: #333;" class = "error_box">
+				<div class = "large_warning_icon" style="text-align: left;">
+					<label>For any queries please call us at <a href = "tel://4084751189">(408) 475-1189</a> or email us at <a href = "mailto:saikailashyatra@gmail.com">saikailashyatra@gmail.com</a></label>
+				</div>
+			</div>
 			<%
 				if (!StringUtils.isBlank(registration.getEmailAddress())
 						&& !RequestUtils.hasPhysicalFitnessForm(registration)) {

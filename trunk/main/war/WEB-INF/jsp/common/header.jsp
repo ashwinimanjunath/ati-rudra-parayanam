@@ -43,12 +43,18 @@
 					<h3 style="color: #FFF; margin-bottom: 0px">Om Namo Bhagavate
 						Rudraya!</h3>
 				</div>
+				<% 
+					if (!Boolean.TRUE.equals(request.getAttribute("no-contact-info-in-the-header"))) {
+				%>
 				<div
 					style="clear: both; background: #FFF8C6; color: #333; padding: 10px 0px; opacity: 5">
 					<div>
 						<label>For any queries please call us at <a href = "tel://4084751189">(408) 475-1189</a> or email us at <a href = "mailto:saikailashyatra@gmail.com">saikailashyatra@gmail.com</a></label>
 					</div>
 				</div>
+				<%
+					}
+				%>
 				<div class="menu">
 					<ul id="topnav">
 						<li><a href="<%=cp%>">Home</a></li>
