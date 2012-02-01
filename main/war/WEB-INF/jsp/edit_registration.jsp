@@ -156,7 +156,7 @@
 								<span class="label">Phone Number</span> <input type="text"
 									value="" name="phoneNumber" class="text" />
 								<div class="helpText">A number you are most likely to be
-									available at in the xxx-xxx-xxxx format.</div>
+									available at.</div>
 							</div>
 							<div class="formField">
 								<span class="label">Address</span>
@@ -326,12 +326,15 @@
 	</div>
 </div>
 <script type="text/javascript">
-	window.validationErrors =
-<%=RequestUtils.json(RequestUtils.errors(request))%>
-	;
-	window.registration =
-<%=RequestUtils.json(registration)%>
-	;
+	window.validationErrors = <%=RequestUtils.json(RequestUtils.errors(request))%>;
+	window.registration = <%=RequestUtils.json(registration)%>;
+<%	
+	if (!RequestUtils.errors(request).isEmpty ()) {
+%>
+		alert ("Please fix the errors on the page and try saving again.")
+<%			
+	}
+%>
 </script>
 
 <script type="text/javascript" src="<%=cp%>js/app/edit_registration.js"></script>
