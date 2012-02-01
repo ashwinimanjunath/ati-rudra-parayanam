@@ -66,7 +66,7 @@
 			.get("spendTimeAtPN")));
 	registration.setAddress(RequestUtils.string(request, "address",
 			params.get("address")));
-	registration.setPhoneNumber(RequestUtils.phone(request,
+	registration.setPhoneNumber(RequestUtils.string(request,
 			"phoneNumber", params.get("phoneNumber")));
 	registration.setCanChantChamakamFluently(RequestUtils.string(
 			request, "canChantChamakamFluently",
