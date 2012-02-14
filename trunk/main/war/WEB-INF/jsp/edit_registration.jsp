@@ -131,11 +131,9 @@
 										Blank Form Here</a>
 								</div>
 								<div class="notes" style="float: right; width: 60%">
-									<div class="first_line">This requirement is mandatory.</div>
-									<div>We strongly believe that Swami's grace will help us
-										accomplish this pilgrimage irrespective of our age, physical,
-										mental and spiritual fitness. Thus please treat this as
-										important but routine.</div>
+									<div class="first_line">This is to ensure that you are fully aware of the health requirements for the pilgrimage.</div>
+									<div>Thus this is <strong style="text-decoration:underline">important but not mandatory</strong>. Please note that we are undertaking this pilgrimage <strong style="text-decoration:underline">completely on our own risk</strong>.
+                                    We strongly believe that Swami's grace will help us accomplish this pilgrimage irrespective of our age, physical, mental and spiritual fitness.</div>
 								</div>
 								<div class="clear"></div>
 							</div>
