@@ -36,6 +36,7 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>E-Mail Address</th>
+					<th>Date of Birth</th>
 					<th>Phone Number</th>
 					<th>Can Chant Namakam Fluently</th>
 					<th>Can Chant Chamakam Fluently</th>
@@ -54,6 +55,7 @@
 					<td><%=StringUtils.capitalize(registration.getLastName()
 						.toLowerCase())%></td>
 					<td><%=registration.getEmailAddress().toLowerCase()%></td>
+					<td><%=registration.getDateOfBirth()%></td>
 					<td style="white-space: nowrap;"><%=registration.getPhoneNumber()%></td>
 					<td><%=registration.getCanChantNamakamFluently()
 						.toUpperCase()%></td>
