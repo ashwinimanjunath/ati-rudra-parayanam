@@ -26,6 +26,7 @@
 		<th>E-Mail Address</th>
 		<th>Date of Birth</th>
 		<th>Phone Number</th>
+        <th>Address</th>
 		<th>Can Chant Namakam Fluently</th>
 		<th>Can Chant Chamakam Fluently</th>
 		<th>Submitted Medical Form</th>
@@ -45,6 +46,7 @@
 		<td><%=registration.getEmailAddress().toLowerCase()%></td>
 		<td><%=registration.getDateOfBirth()%></td>
 		<td style="white-space: nowrap;"><%=registration.getPhoneNumber()%></td>
+        <td><%=registration.getAddress()%></td>
 		<td><%=registration.getCanChantNamakamFluently()
 						.toUpperCase()%></td>
 		<td><%=registration.getCanChantChamakamFluently()
