@@ -1,3 +1,6 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.arp.arp_2012.FlightLeg"%>
 <%@page import="org.arp.arp_2012.utils.RequestUtils"%>
 <%@page import="org.arp.arp_2012.Registration"%>
@@ -14,9 +17,11 @@
 		<th>Last Name</th>
 		<th>E-Mail Address</th>
 		<th>Phone Number</th>
+        <th>Citizenship</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Age</th>
         <th>Address</th>
-		<th>Link to File</th>
-		<th>Link to Medical Form</th>
         <th>Trip Type</th>
 <%
     for (int i = 0; i < 9; ++i) {
@@ -30,7 +35,11 @@
 	</tr>
 	<%
 		int i = 0;
+        final SimpleDateFormat dateFormat = new SimpleDateFormat ("MM/dd/yyy");
+        final Calendar now = Calendar.getInstance();
 		for (Registration registration : RequestUtils.all()) {
+            final Calendar dob = Calendar.getInstance();
+            dob.setTime(dateFormat.parse(registration.getDateOfBirth()));
 	%>
 	<tr>
 		<td><%=StringUtils.capitalize(registration.getFirstName()
@@ -39,6 +48,10 @@
 						.toLowerCase())%></td>
 		<td><%=registration.getEmailAddress().toLowerCase()%></td>
 		<td style="white-space: nowrap;"><%=registration.getPhoneNumber()%></td>
+        <td style="white-space: nowrap;"><%=registration.getCitizenship()%></td>
+        <td style="white-space: nowrap;"><%=registration.getGender()%></td>
+        <td style="white-space: nowrap;"><%=registration.getDateOfBirth()%></td>
+        <td style="white-space: nowrap;"><%=now.get(Calendar.YEAR) - dob.get (Calendar.YEAR)%></td>
         <td><%=registration.getAddress()%></td>
         <td><%= registration.getTripType() %></td>
 <%
