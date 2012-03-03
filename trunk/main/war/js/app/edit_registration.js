@@ -131,7 +131,17 @@
 				altField : "#date-of-departure-complete",
 				altFormat : "DD, d MM, yy"
 			});
+			
+			$(".datePickerDestination").datepicker({
+				dateFormat : "mm/dd/yy",
+				defaultDate : "07/7/2012",
+				maxDate : "07/31/2012",
+				minDate : "04/01/2012",
+				altField : "#date-of-departure-from-destination-complete",
+				altFormat : "DD, d MM, yy"
+			});
 
+			
 			$("#editRegistration").show();
 
 		});

@@ -121,23 +121,28 @@ public class RequestUtils {
 				.get(cityOfDepartureParamName));
 		String dateOfDeparture = StringUtils.trimToNull(params
 				.get(dateOfDepartureParamName));
-		if (departure != null || arrival != null || dateOfDeparture != null) {
-			// if at least one of the fields are entered then validate all the
-			// three
-			arrival = param(request, cityOfArrivalParamName, arrival, null,
-					false, "cityOfArrival");
+		// Return null if all the three are null
+		if (arrival == null && departure == null && dateOfDeparture == null) {
+			return null;
+		}
+		final FlightLeg flightLeg = new FlightLeg();
+		if (departure != null) {
 			departure = param(request, cityOfDepartureParamName, departure,
 					null, false, "cityOfDeparture");
+			flightLeg.setCityOfDeparture(departure);
+		}
+		if (arrival != null) {
+			arrival = param(request, cityOfArrivalParamName, arrival, null,
+					false, "cityOfArrival");
+			flightLeg.setCityOfArrival(arrival);
+
+		}
+		if (dateOfDeparture != null) {
 			dateOfDeparture = param(request, dateOfDepartureParamName,
 					dateOfDeparture, DATE, false, "dateOfDeparture");
-			final FlightLeg flightLeg = new FlightLeg();
-			flightLeg.setCityOfArrival(arrival);
-			flightLeg.setCityOfDeparture(departure);
 			flightLeg.setDateOfDeparture(dateOfDeparture);
-			return flightLeg;
 		}
-
-		return null;
+		return flightLeg;
 	}
 
 	public static final FamilyMember familyMember(

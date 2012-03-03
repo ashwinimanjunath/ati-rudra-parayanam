@@ -269,6 +269,19 @@
 												id="date-of-departure-complete" readonly="readonly">
 										</div>
 										<div class="clear"></div>
+                                        <div style="float: left; width: 40%">
+                                            <span class="label">Date of Return (from Kathmandu)</span> <input
+                                                type="text" value="" name="roundTripFromDestination[dateOfDeparture]"
+                                                class="text datePickerDestination" maxlength=4 />
+                                            <div class="helpText">MM/DD/YYYY</div>
+                                        </div>
+                                        <div class="notes" style="float: right; width: 60%;padding-top: 25px">
+                                            <span>You are starting your return on</span> <input type="text"
+                                                class="text"
+                                                style="font-size: small; background: transparent; border: none;"
+                                                id="date-of-departure-from-destination-complete" readonly="readonly">
+                                        </div>
+                                        <div class="clear"></div>
 									</div>
 								</div>
 								<div id="multiCity-content" style="display: none">

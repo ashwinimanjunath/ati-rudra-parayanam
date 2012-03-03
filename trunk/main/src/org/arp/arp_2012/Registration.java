@@ -37,6 +37,7 @@ public final class Registration {
 	private TripType tripType = TripType.OWN_ARRANGEMENTS;
 
 	private FlightLeg roundTrip = new FlightLeg();
+	private FlightLeg roundTripFromDestination = new FlightLeg();
 
 	private List<FlightLeg> multiCityFlightLegs = new ArrayList<FlightLeg>();
 
@@ -47,20 +48,19 @@ public final class Registration {
 	private String address;
 
 	private String canChantNamakamFluently;
-	private String canChantChamakamFluently;
-	
-	private String joiningWithFamily = "NO";
-	
-	private List<FamilyMember> familyMembers = null;
 
+	private String canChantChamakamFluently;
+
+	private String joiningWithFamily = "NO";
+	private List<FamilyMember> familyMembers = null;
+	
 	public final String getAddress() {
 		return address;
 	}
-
+	
 	public final String getCanChantChamakamFluently() {
 		return canChantChamakamFluently;
 	}
-
 
 	public final String getCanChantNamakamFluently() {
 		return canChantNamakamFluently;
@@ -69,7 +69,7 @@ public final class Registration {
 	public Citizenship getCitizenship() {
 		return citizenship;
 	}
-	
+
 
 	public final String getComments() {
 		return comments;
@@ -78,6 +78,7 @@ public final class Registration {
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
+	
 
 	public String getEmailAddress() {
 		return emailAddress;
@@ -121,6 +122,10 @@ public final class Registration {
 
 	public final FlightLeg getRoundTrip() {
 		return roundTrip;
+	}
+
+	public final FlightLeg getRoundTripFromDestination() {
+		return roundTripFromDestination;
 	}
 
 	public String getSpendTimeAtPN() {
@@ -215,6 +220,10 @@ public final class Registration {
 
 	public final void setRoundTrip(FlightLeg roundTrip) {
 		this.roundTrip = roundTrip;
+	}
+
+	public final void setRoundTripFromDestination(FlightLeg roundTripFromDestination) {
+		this.roundTripFromDestination = roundTripFromDestination;
 	}
 
 	public void setSpendTimeAtPN(String spendTimeAtPN) {
