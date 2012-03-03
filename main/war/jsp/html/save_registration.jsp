@@ -84,6 +84,8 @@
 	} else if (registration.getTripType() == TripType.ROUND_TRIP) {
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
 				params, "roundTrip"));
+        registration.setRoundTripFromDestination(RequestUtils.flightLeg(request,
+                params, "roundTripFromDestination"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
 		final List<FlightLeg> legs = new ArrayList<FlightLeg>();
 		for (int i = 0; i < 9; ++i) {
