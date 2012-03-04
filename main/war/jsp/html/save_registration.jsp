@@ -28,96 +28,102 @@
 	while (iterator.hasNext()) {
 		final FileItemStream item = iterator.next();
 		if (item.isFormField()) {
-			final String paramValue = Streams.asString(item
-					.openStream());
-			params.put(item.getFieldName(), paramValue);
+	final String paramValue = Streams.asString(item
+			.openStream());
+	params.put(item.getFieldName(), paramValue);
 		} else {
-			final String clientFileName = item.getName();
-			if (!StringUtils.isBlank(clientFileName)) {
-				params.put(item.getFieldName(), clientFileName);
-				final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				Streams.copy(item.openStream(), bos, true);
-				final byte[] fileContents = bos.toByteArray();
-				files.put(item.getFieldName(), fileContents);
-			}
+	final String clientFileName = item.getName();
+	if (!StringUtils.isBlank(clientFileName)) {
+		params.put(item.getFieldName(), clientFileName);
+		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		Streams.copy(item.openStream(), bos, true);
+		final byte[] fileContents = bos.toByteArray();
+		files.put(item.getFieldName(), fileContents);
+	}
 		}
 	}
 
 	final Registration registration = RequestUtils
-			.newRegistration(request);
+	.newRegistration(request);
 
 	registration.setEmailAddress(RequestUtils.email(request,
-			"emailAddress", params.get("emailAddress")));
+	"emailAddress", params.get("emailAddress")));
 	registration.setDateOfBirth(RequestUtils.date(request,
-			"dateOfBirth", params.get("dateOfBirth")));
+	"dateOfBirth", params.get("dateOfBirth")));
 	registration.setFirstName(RequestUtils.string(request, "firstName",
-			params.get("firstName")));
+	params.get("firstName")));
 	registration.setLastName(RequestUtils.string(request, "lastName",
-			params.get("lastName")));
+	params.get("lastName")));
 	registration.setGender(RequestUtils.enuM(request, "gender",
-			params.get("gender"), Gender.class));
+	params.get("gender"), Gender.class));
 	registration
-			.setCitizenship(RequestUtils.enuM(request, "citizenship",
-					params.get("citizenship"), Citizenship.class));
+	.setCitizenship(RequestUtils.enuM(request, "citizenship",
+			params.get("citizenship"), Citizenship.class));
 	registration.setPhysicianStatus(RequestUtils.enuM(request,
-			"physicianStatus", params.get("physicianStatus"),
-			PhysicianStatus.class));
+	"physicianStatus", params.get("physicianStatus"),
+	PhysicianStatus.class));
 	registration.setSpendTimeAtPN(StringUtils.trimToNull(params
-			.get("spendTimeAtPN")));
+	.get("spendTimeAtPN")));
 	registration.setAddress(RequestUtils.string(request, "address",
-			params.get("address")));
+	params.get("address")));
 	registration.setPhoneNumber(RequestUtils.string(request,
-			"phoneNumber", params.get("phoneNumber")));
+	"phoneNumber", params.get("phoneNumber")));
 	registration.setCanChantChamakamFluently(RequestUtils.string(
-			request, "canChantChamakamFluently",
-			params.get("canChantChamakamFluently")));
+	request, "canChantChamakamFluently",
+	params.get("canChantChamakamFluently")));
 	registration.setCanChantNamakamFluently(RequestUtils.string(
-			request, "canChantNamakamFluently",
-			params.get("canChantNamakamFluently")));
+	request, "canChantNamakamFluently",
+	params.get("canChantNamakamFluently")));
+    registration.setJoiningParikrama(RequestUtils.string(
+    request, "joiningParikrama", params.get("joiningParikrama")));
+    registration.setNeedMuleForParikrama(RequestUtils.string(
+    request, "needMuleForParikrama", params.get("needMuleForParikrama")));
 	registration.setTripType(RequestUtils.enuM(request, "tripType",
-			params.get("tripType"), TripType.class));
+	params.get("tripType"), TripType.class));
 
 	if (registration.getTripType() == TripType.OWN_ARRANGEMENTS) {
 		registration.setRoundTrip(null);
 		registration.setMultiCityFlightLegs(Collections
-				.<FlightLeg> emptyList());
+		.<FlightLeg> emptyList());
 	} else if (registration.getTripType() == TripType.ROUND_TRIP) {
 		registration.setRoundTrip(RequestUtils.flightLeg(request,
-				params, "roundTrip"));
-        registration.setRoundTripFromDestination(RequestUtils.flightLeg(request,
-                params, "roundTripFromDestination"));
+		params, "roundTrip"));
+        registration.setReturnFromRoundTrip(RequestUtils.flightLeg(request,
+                params, "returnFromRoundTrip"));
 	} else if (registration.getTripType() == TripType.MULTI_CITY) {
 		final List<FlightLeg> legs = new ArrayList<FlightLeg>();
 		for (int i = 0; i < 9; ++i) {
-			final FlightLeg leg = RequestUtils.flightLeg(request,
-					params, "multiCityFlightLegs[" + i + "]");
-			if (leg != null) {
-				legs.add(leg);
-			}
+	final FlightLeg leg = RequestUtils.flightLeg(request,
+			params, "multiCityFlightLegs[" + i + "]");
+	if (leg != null) {
+		legs.add(leg);
+	}
 		}
 		registration.setMultiCityFlightLegs(legs);
 	}
 
 	registration.setJoiningWithFamily(StringUtils.trimToNull(params
-			.get("joiningWithFamily")));
+	.get("joiningWithFamily")));
 	if ("yes".equalsIgnoreCase(registration.getJoiningWithFamily())) {
 		final List<FamilyMember> members = new ArrayList<FamilyMember>();
 		for (int i = 0; i < 5; ++i) {
-			final FamilyMember member = RequestUtils.familyMember(
-					request, params, "familyMembers[" + i + "]");
-			if (member != null) {
-				members.add(member);
-			}
+	final FamilyMember member = RequestUtils.familyMember(
+			request, params, "familyMembers[" + i + "]");
+	if (member != null) {
+		members.add(member);
+	}
 		}
 		registration.setFamilyMembers(members);
 	} else {
 		registration.setJoiningWithFamily("NO");
 		registration.setFamilyMembers(Collections
-				.<FamilyMember> emptyList());
+		.<FamilyMember> emptyList());
 	}
 
 	registration.setComments(StringUtils.trimToNull(params
-			.get("comments")));
+	.get("comments")));
+    registration.setInternalNotes(StringUtils.trimToNull(params
+    .get("internalNotes")));
 
 	if (RequestUtils.errors(request).isEmpty()) {
 		final byte[] fileContents = files.get("physicalFitnessForm");

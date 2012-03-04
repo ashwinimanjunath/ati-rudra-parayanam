@@ -37,7 +37,7 @@ public final class Registration {
 	private TripType tripType = TripType.OWN_ARRANGEMENTS;
 
 	private FlightLeg roundTrip = new FlightLeg();
-	private FlightLeg roundTripFromDestination = new FlightLeg();
+	private FlightLeg returnFromRoundTrip = new FlightLeg();
 
 	private List<FlightLeg> multiCityFlightLegs = new ArrayList<FlightLeg>();
 
@@ -51,13 +51,19 @@ public final class Registration {
 
 	private String canChantChamakamFluently;
 
+	private String joiningParikrama;
+
+	private String needMuleForParikrama = "NO";
 	private String joiningWithFamily = "NO";
+
 	private List<FamilyMember> familyMembers = null;
-	
+
+	private String internalNotes;
+
 	public final String getAddress() {
 		return address;
 	}
-	
+
 	public final String getCanChantChamakamFluently() {
 		return canChantChamakamFluently;
 	}
@@ -70,7 +76,6 @@ public final class Registration {
 		return citizenship;
 	}
 
-
 	public final String getComments() {
 		return comments;
 	}
@@ -78,7 +83,6 @@ public final class Registration {
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	
 
 	public String getEmailAddress() {
 		return emailAddress;
@@ -96,6 +100,14 @@ public final class Registration {
 		return gender;
 	}
 
+	public final String getInternalNotes() {
+		return internalNotes;
+	}
+
+	public final String getJoiningParikrama() {
+		return joiningParikrama;
+	}
+
 	public final String getJoiningWithFamily() {
 		return joiningWithFamily;
 	}
@@ -106,6 +118,10 @@ public final class Registration {
 
 	public final List<FlightLeg> getMultiCityFlightLegs() {
 		return multiCityFlightLegs;
+	}
+
+	public final String getNeedMuleForParikrama() {
+		return needMuleForParikrama;
 	}
 
 	public final String getPhoneNumber() {
@@ -120,12 +136,12 @@ public final class Registration {
 		return physicianStatus;
 	}
 
-	public final FlightLeg getRoundTrip() {
-		return roundTrip;
+	public final FlightLeg getReturnFromRoundTrip() {
+		return returnFromRoundTrip;
 	}
 
-	public final FlightLeg getRoundTripFromDestination() {
-		return roundTripFromDestination;
+	public final FlightLeg getRoundTrip() {
+		return roundTrip;
 	}
 
 	public String getSpendTimeAtPN() {
@@ -194,6 +210,14 @@ public final class Registration {
 		this.gender = gender;
 	}
 
+	public final void setInternalNotes(String internalNotes) {
+		this.internalNotes = internalNotes;
+	}
+
+	public final void setJoiningParikrama(String joiningParikrama) {
+		this.joiningParikrama = joiningParikrama;
+	}
+
 	public final void setJoiningWithFamily(String joiningWithFamily) {
 		this.joiningWithFamily = joiningWithFamily;
 	}
@@ -204,6 +228,10 @@ public final class Registration {
 
 	public final void setMultiCityFlightLegs(List<FlightLeg> multiCityFlightLegs) {
 		this.multiCityFlightLegs = multiCityFlightLegs;
+	}
+
+	public final void setNeedMuleForParikrama(String needMuleForParikrama) {
+		this.needMuleForParikrama = needMuleForParikrama;
 	}
 
 	public final void setPhoneNumber(String phoneNumber) {
@@ -218,12 +246,12 @@ public final class Registration {
 		this.physicianStatus = physicianStatus;
 	}
 
-	public final void setRoundTrip(FlightLeg roundTrip) {
-		this.roundTrip = roundTrip;
+	public final void setReturnFromRoundTrip(FlightLeg roundTripFromDestination) {
+		this.returnFromRoundTrip = roundTripFromDestination;
 	}
 
-	public final void setRoundTripFromDestination(FlightLeg roundTripFromDestination) {
-		this.roundTripFromDestination = roundTripFromDestination;
+	public final void setRoundTrip(FlightLeg roundTrip) {
+		this.roundTrip = roundTrip;
 	}
 
 	public void setSpendTimeAtPN(String spendTimeAtPN) {
