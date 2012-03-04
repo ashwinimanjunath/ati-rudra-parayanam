@@ -388,8 +388,8 @@
                                     </div>
                                 </div>
                                 <div class="notes" style="float: right; width: 60%">
-                                    <div>The group plans to spend time at Prashanti Nilayam on the <strong>9th and 10th of July</strong> after the yatra.</div>
-                                    <div>We would be happy if you joined us. Would you like to ?</div>
+                                    <div>The group plans to spend time at Prashanti Nilayam on the <strong>9th and 10th of July</strong></div>
+                                    <div> after the pilgrimage. Please do consider this while making your travel arrangements. We would be happy if you joined us. Would you like to ?</div>
                                 </div>
                                 <div class="clear"></div>
                             </div>
