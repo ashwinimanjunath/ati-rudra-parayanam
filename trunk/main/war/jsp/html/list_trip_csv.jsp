@@ -21,6 +21,10 @@
         <th>Gender</th>
         <th>Date of Birth</th>
         <th>Age</th>
+        <th>Prashanti ?</th>
+        <th>Joining Parikrama ?</th>
+        <th>Need Mule ?</th>
+        <th>Medical Professional ?</th>
         <th>Address</th>
         <th>Trip Type</th>
 <%
@@ -52,6 +56,10 @@
         <td style="white-space: nowrap;"><%=registration.getGender()%></td>
         <td style="white-space: nowrap;"><%=registration.getDateOfBirth()%></td>
         <td style="white-space: nowrap;"><%=now.get(Calendar.YEAR) - dob.get (Calendar.YEAR)%></td>
+        <td style="white-space: nowrap;"><%=registration.getSpendTimeAtPN()%></td>
+        <td style="white-space: nowrap;"><%=registration.getJoiningParikrama()%></td>
+        <td style="white-space: nowrap;"><%=registration.getNeedMuleForParikrama()%></td>
+        <td style="white-space: nowrap;"><%=registration.getPhysicianStatus()%></td>
         <td><%=registration.getAddress()%></td>
         <td><%= registration.getTripType() %></td>
 <%
