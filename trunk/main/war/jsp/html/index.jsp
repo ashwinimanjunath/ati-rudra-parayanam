@@ -6,13 +6,6 @@
                 <ul id="myRoundabout">
                     <li>
                         <div class="prod_holder">
-                            <a href="<%=cp%>jsp/html/register_new_return.jsp">
-                                <img src="<%= cp %>image/register.png" alt="Spicylicious store" />
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="prod_holder">
                             <a href="#">
                                 <img src="<%= cp %>image/himalayas.jpg"  />
                             </a>
