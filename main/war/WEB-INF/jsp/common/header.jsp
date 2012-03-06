@@ -63,7 +63,7 @@
 								Kailash Yatra</a>
 							<ul class="children">
 								<li><a href="<%=cp%>jsp/html/register_new_return.jsp">
-										Register <span style="font-size: smaller; font-style: italic;">(Closed)</span>
+										Register <span style="font-size: smaller; font-style: italic;">(Reopened till 03/09/12)</span>
 								</a></li>
 								<li><a href="<%=cp%>KM12-Medical-certificate-Overseas.pdf"
 									target="_blank">Physical Fitness Form</a></li>
