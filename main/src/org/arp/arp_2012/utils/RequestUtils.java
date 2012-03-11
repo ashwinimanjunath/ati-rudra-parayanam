@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public class RequestUtils {
 
+	private static final Pattern AIRPORT_CODE = Pattern.compile("[A-Z]{3,4}");
 	private static final String REGISTRATION_KEY = "registration";
 	public static final String VALIDATION_ERRORS = "validation_errors";
 	private static Properties messages = new Properties();
@@ -46,6 +48,63 @@ public class RequestUtils {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static final String airportCode (final String airport) {
+		if (StringUtils.isEmpty(airport)) {
+			return null;
+		}
+		final Matcher m = AIRPORT_CODE.matcher(airport);
+		if (m.find()) {
+			return airport.substring(m.start(), m.end());
+		}
+		return null;
+		
+	}
+
+	public static final List<Registration> all() {
+		try {
+			final List<Registration> registrations = new ArrayList<Registration>();
+			final S3Client client = new S3Client();
+			for (final S3ObjectSummary summary : client.all()) {
+				if (!summary.getKey().toLowerCase().endsWith(".xml")) {
+					continue;
+				}
+				final S3Object file = client.findFile(summary.getKey());
+				final InputStream is = file.getObjectContent();
+				try {
+					final Registration registration = fromXML(
+							Registration.class, is);
+					registrations.add(registration);
+				} finally {
+					is.close();
+				}
+			}
+			Collections.sort(registrations, new Comparator<Registration>() {
+				@Override
+				public int compare(Registration o1, Registration o2) {
+					final String f1 = o1.getFirstName();
+					final String f2 = o2.getFirstName();
+					if (f1 != null && f2 != null) {
+						int cmp = f1.toLowerCase().compareTo(f2.toLowerCase());
+						if (cmp == 0) {
+							final String l1 = o1.getFirstName();
+							final String l2 = o2.getFirstName();
+							if (l1 != null && l2 != null) {
+								return l1.compareTo(l2);
+							}
+						}
+						return cmp;
+					}
+					return 0;
+				}
+			});
+			return registrations;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	public static final String date(final HttpServletRequest request,
@@ -108,6 +167,31 @@ public class RequestUtils {
 		return validationErrors;
 	}
 
+	public static final FamilyMember familyMember(
+			final HttpServletRequest request, final Map<String, String> params,
+			final String prefix) {
+		final String nameParamName = prefix + "[name]";
+		final String relationshipParamName = prefix + "[relationship]";
+
+		// First check to see if even one value is entered
+		String name = StringUtils.trimToNull(params.get(nameParamName));
+		String relationship = StringUtils.trimToNull(params
+				.get(relationshipParamName));
+		if (relationship != null || name != null) {
+			// if at least one of the fields are entered then validate all the
+			// three
+			name = param(request, nameParamName, name, null, false, "name");
+			relationship = param(request, relationshipParamName, relationship,
+					null, false, "relationship");
+			final FamilyMember member = new FamilyMember();
+			member.setName(name);
+			member.setRelationship(relationship);
+			return member;
+		}
+
+		return null;
+	}
+
 	public static final FlightLeg flightLeg(final HttpServletRequest request,
 			final Map<String, String> params, final String prefix) {
 		final String cityOfArrivalParamName = prefix + "[cityOfArrival]";
@@ -143,31 +227,6 @@ public class RequestUtils {
 			flightLeg.setDateOfDeparture(dateOfDeparture);
 		}
 		return flightLeg;
-	}
-
-	public static final FamilyMember familyMember(
-			final HttpServletRequest request, final Map<String, String> params,
-			final String prefix) {
-		final String nameParamName = prefix + "[name]";
-		final String relationshipParamName = prefix + "[relationship]";
-
-		// First check to see if even one value is entered
-		String name = StringUtils.trimToNull(params.get(nameParamName));
-		String relationship = StringUtils.trimToNull(params
-				.get(relationshipParamName));
-		if (relationship != null || name != null) {
-			// if at least one of the fields are entered then validate all the
-			// three
-			name = param(request, nameParamName, name, null, false, "name");
-			relationship = param(request, relationshipParamName, relationship,
-					null, false, "relationship");
-			final FamilyMember member = new FamilyMember();
-			member.setName(name);
-			member.setRelationship(relationship);
-			return member;
-		}
-
-		return null;
 	}
 
 	public static final <T> T fromXML(final Class<T> klass, final InputStream is) {
@@ -393,52 +452,7 @@ public class RequestUtils {
 			final int yearOfBirth) {
 		return email.toLowerCase() + "-" + yearOfBirth + ".xml";
 	}
-
+	
 	private RequestUtils() {
-	}
-
-	public static final List<Registration> all() {
-		try {
-			final List<Registration> registrations = new ArrayList<Registration>();
-			final S3Client client = new S3Client();
-			for (final S3ObjectSummary summary : client.all()) {
-				if (!summary.getKey().toLowerCase().endsWith(".xml")) {
-					continue;
-				}
-				final S3Object file = client.findFile(summary.getKey());
-				final InputStream is = file.getObjectContent();
-				try {
-					final Registration registration = fromXML(
-							Registration.class, is);
-					registrations.add(registration);
-				} finally {
-					is.close();
-				}
-			}
-			Collections.sort(registrations, new Comparator<Registration>() {
-				@Override
-				public int compare(Registration o1, Registration o2) {
-					final String f1 = o1.getFirstName();
-					final String f2 = o2.getFirstName();
-					if (f1 != null && f2 != null) {
-						int cmp = f1.toLowerCase().compareTo(f2.toLowerCase());
-						if (cmp == 0) {
-							final String l1 = o1.getFirstName();
-							final String l2 = o2.getFirstName();
-							if (l1 != null && l2 != null) {
-								return l1.compareTo(l2);
-							}
-						}
-						return cmp;
-					}
-					return 0;
-				}
-			});
-			return registrations;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return null;
 	}
 }
