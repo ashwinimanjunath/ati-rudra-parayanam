@@ -30,9 +30,6 @@
         <th>Internal Notes</th>
         <th>Address</th>
         <th>Trip Type</th>
-        <th>Round Trip City Of Departure</th>
-        <th>Round Date Of Departure</th>
-        <th>Round Date Of Return</th>
 <%
     for (int i = 0; i < 9; ++i) {
 %>
@@ -70,15 +67,24 @@
         <td style="white-space: nowrap;"><%=StringUtils.trimToEmpty(registration.getInternalNotes())%></td>
         <td><%=registration.getAddress()%></td>
         <td><%= registration.getTripType() %></td>
-        <td><%= registration.getTripType() == TripType.ROUND_TRIP ? registration.getRoundTrip().getCityOfDeparture() : "&nbsp;"%></td>
-        <td><%= registration.getTripType() == TripType.ROUND_TRIP ? registration.getRoundTrip().getDateOfDeparture() : "&nbsp;" %></td>
-        <td><%= registration.getTripType() == TripType.ROUND_TRIP ? registration.getReturnFromRoundTrip().getDateOfDeparture() : "&nbsp;" %></td>
+<%
+    if (registration.getTripType() == TripType.ROUND_TRIP) {
+%>        
+        <td><%= RequestUtils.airportCode(registration.getRoundTrip().getCityOfDeparture()) %></td>
+        <td>KTM</td>
+        <td><%= registration.getRoundTrip().getDateOfDeparture() %></td>
+        <td>KTM</td>
+        <td><%= RequestUtils.airportCode(registration.getRoundTrip().getCityOfDeparture()) %></td>
+        <td><%= registration.getReturnFromRoundTrip().getDateOfDeparture()  %></td>
+<%
+    }
+%>
 <%
     if (registration.getMultiCityFlightLegs() != null) {
         for (final FlightLeg leg : registration.getMultiCityFlightLegs()) {
 %>
-        <td><%= leg.getCityOfDeparture() %> </td>
-        <td><%= leg.getCityOfArrival() %> </td>
+        <td><%= RequestUtils.airportCode(leg.getCityOfDeparture()) %> </td>
+        <td><%= RequestUtils.airportCode(leg.getCityOfArrival()) %> </td>
         <td><%= leg.getDateOfDeparture() %> </td>
 <%        
         }

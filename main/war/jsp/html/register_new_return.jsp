@@ -9,7 +9,7 @@
             <div class="box-login">
                 <div class="box-content fixed">
                     <div class="stitched"></div>
-                    <div class="left">
+                    <!-- div class="left">
                         <h6>New Registration</h6>
                         <p>Registration is mandatory for every devotee. However please note that <strong>registration alone does
                             not confirm your spot</strong> for the pilgrimage.Your application will be carefully reviewed for
@@ -18,7 +18,7 @@
                         <a class="button" id="button-contact" href="<%=cp%>jsp/html/registration_conditions.jsp">
                             <span>Register</span>
                         </a>
-                    </div>
+                    </div-->
                     <div class="right">
                         <h6>Edit an existing registration</h6>
                         <form id="editRegistrationForm" action="<%=cp%>jsp/html/register_new_return_submit.jsp"
