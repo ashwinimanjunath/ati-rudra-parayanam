@@ -1,0 +1,1 @@
+This project is to maintain the website for Ati Rudra Parayanam. See www.sai83atirudram.org
